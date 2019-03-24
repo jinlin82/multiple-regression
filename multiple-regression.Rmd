@@ -50,6 +50,98 @@ Sys.setlocale("LC_ALL", "Chinese")
 
 # 多元线性回归模型及其基本假定
 
+研究一个随机变量与多个自变量之间线性回归问题的统计分析方法称多元线性回归。一元线性回归分析介绍了因变
+量y与一个自变量x有关的线性回归问题，但在实际应用中，因为客观现象非常复杂，现象之间的联系方式和性质各
+不相同，影响因变量变化的自变量往往是多个而不是一个。如果仅仅进行一元回归分析，是不能得到满意的结果的。
+因此，有必要将一个因变量与多个自变量联系起来进行分析。如影响农作物收获量的因素，除了施肥量外，还有耕
+作深度、降雨量、土质等因素，可以分析各个因素的变化对农作物收获量变化的影响程度。
+
+在线性相关条件下，研究两个和两个以上自变量对一个因变量的数量变化关系，称为多元线性回归分析，表现这一
+数量关系的数学表达式则称为多元线性回归模型。多元线性回归分析的基本原理与一元线性回归分析相同，只是涉
+及的自变量多，在计算上比较麻烦一些而已。本节将重点介绍多元线性回归模型及其基本假设、回归模型未知参数
+的估计及其性质、回归方程及回归系数的显著性检验等。多元回归的计算量要比一元回归的大得多，一般采用计算
+机软件完成计算。
+
+## 多元线性回归模型的基本形式
+
+多元线性回归模型是指描述因变量 $y$ 与一组自变量 $x_1,x_2, \ldots ,x_p$ 以及随机误差项 $\varepsilon$的
+关系的等式。其一般表达式为：
+
+$$y = \beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  +\beta _p{x_p}+ \varepsilon$$ {#eq:model1}
+
+式中， $\beta _0,\beta _1,\beta _2,\cdots,\beta_p$ 是 $p+1$ 个未知参数， $\beta_0$ 称为回归截距， 
+$\beta _1,\cdots,\beta_p$称为回归系数。 $y$称为被解释变量（因变量），而 $x_1,x_2,\dots,x_p$
+是p个可以精确测量并可控制的自变量，称为解释变量。 $p=1$时，式 [@eq:model1] 即为一元线性回归模型， 
+ $p \ge 2$ 时，则称式 [@eq:model1] 为多元线性回归模型。
+ 
+对于一个实际问题，如果获得 $n$ 组观测数据 $(x_{i1},x_{i2}, \ldots ,x_{ip};y_i)(i = 1,2 \cdots ,n)$ ，
+则线性回归模型式 [@eq:model1] 可表示为：
+
+$$\left\{ \begin{array}{l}
+y_1 = \beta _0 + \beta _1{x_{11}} + \beta _2{x_{12}} +  \cdots \beta _p{x_{1p}} + \varepsilon _1\\
+y_2 = \beta _0 + \beta _1{x_{21}} + \beta _2{x_{22}} +  \cdots \beta _p{x_{2p}} + \varepsilon _2\\
+ \cdots  \cdots  \cdots  \cdots \\
+y_n = \beta _0 + \beta _1{x_{n1}} + \beta _2{x_{n2}} +  \cdots \beta _p{x_{np}} + \varepsilon _n
+\end{array} \right.$$ {#eq:model2}
+
+写成矩阵形式为： 
+
+$$Y=X\beta+\varepsilon$$ {#eq:model3}
+
+式中，
+
+$$Y = \left[ \begin{array}{*{20}{c}} y_1\\y_2\\\vdots \\y_n \end{array} \right],
+X = \left[ \begin{array}{c} 1&x_{11}&x_{12}&\cdots&x_{1p}\\ 1&x_{21}&x_{22}&\cdots&x_{2p}\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\ 1&x_{n1}&x_{n2}&\cdots&x_{np}\end{array} \right],
+\beta  = \left[ \begin{array}{l} \beta _0\\ \beta _1\\ \vdots \\ \beta _p \end{array} \right],
+\varepsilon  = \left[ \begin{array}{l} \varepsilon _1\\ \varepsilon _2\\ \vdots \\ \varepsilon _n
+\end{array} \right]$$ 
+
+
+矩阵 $X$ 是一个 $n \times (p+1)$ 的矩阵，人们常称 $X$ 为回归设计矩阵。公式 [@eq:model1] 中的 $\varepsilon$ 
+是随机误差，与一元线性回归的假定类似，对随机误差项也假定：
+
+$$\left\{ \begin{array}{l} E(\varepsilon ) = 0\\ Var(\varepsilon ) = \sigma ^2 \end{array} 
+\right.$$ {#eq:model4}
+
+称
+
+$$E(y) = \beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  + \beta _p{x_p}$$ {#eq:model5}
+
+为总体回归方程或理论回归方程。
+
+## 多元线性回归模型的基本假定
+
+为了方便地进行模型的参数估计，对回归方程式 [@eq:model2] 有如下的基本假定：
+
+
+## 总体回归方程
+
+# 多元线性回归模型参数的估计
+
+## 样本多元线性回归函数
+
+## 参数的最小二乘估计及性质
+
+## 多元线性回归函数的拟合优度
+
+## 总体方差的估计
+
+# 多元线性回归中的显著性检验和参数区间估计
+
+## 显著性检验
+
+### 线性关系显著性检验
+
+### 回归系数显著性检验
+
+## 区间估计
+
+# 多元回归方程的预测
+
+## 点预测
+
+## 区间预测
 
 
 # 参考文献
