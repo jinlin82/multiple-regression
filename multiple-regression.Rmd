@@ -74,7 +74,7 @@ $\beta _1,\cdots,\beta_p$称为回归系数。 $y$称为被解释变量（因变
 是p个可以精确测量并可控制的自变量，称为解释变量。 $p=1$时，式 [@eq:model1] 即为一元线性回归模型， 
  $p \ge 2$ 时，则称式 [@eq:model1] 为多元线性回归模型。
  
-对于一个实际问题，如果获得 $n$ 组观测数据 $(x_{i1},x_{i2}, \ldots ,x_{ip};y_i)(i = 1,2 \cdots ,n)$ ，
+对于一个实际问题，如果获得 $n$ 组观测数据 $(x_{i1},x_{i2}, \cdots ,x_{ip};y_i)(i = 1,2 \cdots ,n)$ ，
 则线性回归模型式 [@eq:model1] 可表示为：
 
 $$\left\{ \begin{array}{l}
@@ -98,45 +98,295 @@ X = \left[ \begin{array}{c} 1&x_{11}&x_{12}&\cdots&x_{1p}\\ 1&x_{21}&x_{22}&\cdo
 \end{array} \right]$$ 
 
 
-矩阵 $X$ 是一个 $n \times (p+1)$ 的矩阵，人们常称 $X$ 为回归设计矩阵。公式 [@eq:model1] 中的 $\varepsilon$ 
-是随机误差，与一元线性回归的假定类似，对随机误差项也假定：
-
-$$\left\{ \begin{array}{l} E(\varepsilon ) = 0\\ Var(\varepsilon ) = \sigma ^2 \end{array} 
-\right.$$ {#eq:model4}
-
-称
-
-$$E(y) = \beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  + \beta _p{x_p}$$ {#eq:model5}
-
-为总体回归方程或理论回归方程。
+矩阵 $X$ 是一个 $n \times (p+1)$ 的矩阵，人们常称 $X$ 为回归设计矩阵。
 
 ## 多元线性回归模型的基本假定
 
 为了方便地进行模型的参数估计，对回归方程式 [@eq:model2] 有如下的基本假定：
-(1)
+
+(1)解释变量 $x_1,x_2,\cdots,x_p$ 是确定性变量，即非随机变量，且要求 $rank(X)=p+1<n$ 。
+这表明设计矩阵 $X$ 中的自变量列之间不相关，且样本容量的个数 $n$ 应大于自变量的个数 $p$ ，
+$X$ 是列满秩矩阵。这个假定同时意味着 $\varepsilon_i$ 和 $x_{i,j},j=1,2,\cdots,p$ 变量之
+间的方差为0，即:
+
+$$\mathop{\rm cov} (\varepsilon _i,x _{ij})=0 $$ 
+
+
+(2)随机误差项具有0均值和等方差，即:
+
+$$\left\{ \begin{array}{l}
+E(\varepsilon _i) = 0,i = 1,2,\cdots ,n\\
+\mathop{\rm cov} (\varepsilon _i,\varepsilon _j) = \left\{ \begin{array}{l}\sigma ^2,&i = j\\
+0,&i \ne j
+\end{array} \right.(i,j = 1,2,\cdots ,n)
+\end{array} \right.$$
+
+
+这个假定常称为高斯－马尔可夫条件。 $E(\varepsilon_i)=0$ ，即假设观测值没有系统误差，随机误差 的平均值为0。 $\mathop{\rm cov} (\varepsilon _i,\varepsilon _j)=0,i \ne j$ ，即随机误差 $\varepsilon _i$ 的协方差为0,表明任意不同的两个样本的随机误差项是不相关的。 $\mathop{\rm cov} (\varepsilon _i,\varepsilon _j)=\sigma ^2,i = j$ 表明各随机误差项的方差相同，即各误差项有相同的精度。
+
+(3)正态分布的假定条件为：
+
+$$\left\{ \begin{array}{l}
+{\varepsilon _i}\~N(0,\sigma ^2),&i=1,2,\cdots,n\\
+\varepsilon_1,\varepsilon_2,\cdots ,\varepsilon_n &相互独立\\ \end{array} \right.$$
+
+
+由上述假定和多元正态分布的性质可知
+
+$$\begin{array}{l}
+\varepsilon \~ N(0,\sigma^2I_n)\\
+E(Y)=X\;\beta\\
+Var(Y)=\sigma^2I_n
+\end{array}$$
+
+因此有
+
+$$Y\~N(X\;\beta,\sigma^2I_n)$$
 
 
 ## 总体回归方程
+
+在满足上述假定的前提下，可进一步推导出：
+
+$$\left\{ \begin{array}{l}
+E(y|x_1,x_2,\cdots,x_p)=\beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  +\beta _p{x_p}\\
+Var(y)=\sigma^2 \end{array}\right.$$ {#eq:model4}
+
+
+它说明随机变量 $y$ 也服从正态分布，且 $y\~N(\beta _0 + {\beta _1}x_1 + \cdots+ \beta_px_p , \sigma^2)$ 。
+
+对于给定的 $X$ ，因变量 $Y$ 是随机变量，有多个不同的取值，这些不同的取值服从正态分布。
+而 $Y$ 的条件期望值 $E(Y|X)$ 是 $X$ 的线性函数，以下将条件期望 $E(Y|X)$ 简记为 $E(Y)$ 。即
+
+$$E(Y)=X\;\beta$$ {#eq:model5}
+
+或
+
+$$E(y)=\beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  +\beta _p{x_p}$$ {#eq:model6}
+
+式 [@eq:model6] 称为总体回归方程或理论回归方程，式 [@eq:model5] 是 式 [@eq:model6] 的矩阵表达。式 [@eq:model6] 
+中， $\beta_0$ 为截距，是 $x_1,x_2,\cdots,x_p = 0$ 时 $y$ 的平均值。如模型不包含 $x_1,x_2,\cdots,x_p = 0$ ， 
+ $\beta_0$ 只是回归方程的截距项，没有实际的经济意义； $\beta_1, \beta_2, \cdots, \beta_p$ 称为偏回归系数，
+在 $\beta_1, \beta_2, \cdots, \beta_{i-1}, \beta_{i+1}, \cdots, \beta_p$ 保持不变，为一常数时，则有
+
+$$\frac{\partial E(y)}{\partial x_i} = \beta _i$$
+
+即 $\beta_i$ 表示在其它自变量保持不变的前提条件下，$x_i$ 每变动一个单位时因变量 $y$ 的平均水平的变动量。
+总体回归方程从平均意义上描述了变量 $y$ 与 $x_i$ 之间的统计规律。
+
+$\varepsilon$ 是随机误差，与一元线性回归的假定类似，对随机误差项也假定：
+
+$$\left\{ \begin{array}{l} E(\varepsilon ) = 0\\ Var(\varepsilon ) = \sigma ^2 \end{array} 
+\right.$$ 
+
 
 # 多元线性回归模型参数的估计
 
 ## 样本多元线性回归函数
 
+多元线性回归方程的参数 $\beta_1, \beta_2, \beta_{i}, \beta_p$ 是未知的，需要利用样本数据去估计它们。当用样
+本统计量 $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 去估计线性回归方程的参数 $\beta_1, \beta_2, 
+\beta_{i}, \beta_p$ 时，得到了估计的多元回归方程,即样本多元线性回归函数。其一般表达形式
+
+$$\hat y = \hat \beta_0 + \hat \beta _1 x_1 + \cdots + \hat \beta _p x_p $$ {#eq:model7}
+
+其随机表达式为
+
+$$y=\hat \beta_0 + \hat \beta _1 x_1 + \cdots + \hat \beta _p x_p + \hat \varepsilon$$ {#eq:model8}
+
+式中，$\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 为参数 $\beta_1, \beta_2, \beta_{i}, \beta_p$  的
+估计值； $\hat y$ 为 $E(y)$ 的估计值。 
+
+
 ## 参数的最小二乘估计及性质
+
+### 模型参数的估计
+
+多元线性回归方程参数的估计与一元线性回归方程的参数估计原理一样，仍然采用最小二乘估计法。
+
+即寻找参数 $\beta_1, \beta_2, \beta_{i}, \beta_p$ 的估计值 ，使离差平方和
+
+$$ Q = \sum\limits_{i = 1}^n {\mathop {(\mathop y\nolimits_i  - \mathop {\hat y}\nolimits_i )}\nolimits^2 } 
+= \sum\limits_{i = 1}^n {{{({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_{i1}} - {{\hat \beta }_2}{x_{i2}} 
+-  \cdots  - {{\hat \beta }_p}{x_{ip}})}^2}} $$ {#eq:model9}
+
+达到最小。
+
+由于式 [@eq:model9] 是关于 $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 的非负二次函数，因而它的最小
+值总是存在的。根据微积分中求极值的原理， $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 应满足
+下列方程组：
+
+$$\left\{ \begin{array}{l}
+\frac{{\partial Q}}{{\partial {\beta _0}}}{|_{{\beta _0} = {{\hat \beta }_0}}} =  - 2\sum\limits_{i = 1}^n {({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_{i1}} - {{\hat \beta }_2}{x_{i2}} -  \cdots  - {{\hat \beta }_p}{x_{ip}})}  = 0\\
+\frac{{\partial Q}}{{\partial {\beta _1}}}{|_{{\beta _1} = {{\hat \beta }_1}}} =  - 2\sum\limits_{i = 1}^n {({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_{i1}} - {{\hat \beta }_2}{x_{i2}} -  \cdots  - {{\hat \beta }_p}{x_{ip}}){x_{i1}}}  = 0\\
+\frac{{\partial Q}}{{\partial {\beta _2}}}{|_{{\beta _2} = {{\hat \beta }_2}}} =  - 2\sum\limits_{i = 1}^n {({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_{i1}} - {{\hat \beta }_2}{x_{i2}} -  \cdots  - {{\hat \beta }_p}{x_{ip}}){x_{i2}}}  = 0\\
+ \cdots  \cdots  \cdots \\
+\frac{{\partial Q}}{{\partial {\beta _p}}}{|_{{\beta _p} = {{\hat \beta }_p}}} =  - 2\sum\limits_{i = 1}^n {({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_{i1}} - {{\hat \beta }_2}{x_{i2}} -  \cdots  - {{\hat \beta }_p}{x_{ip}}){x_{ip}}}  = 0
+\end{array} \right.$$ {#eq:model10}
+
+以上方程组经整理后，得到用矩阵形式表示的正规方程组：
+
+$${X^T}(Y - X\hat \beta ) = 0$$
+
+移项得：
+
+$${X^T}X\hat \beta  = {X^T}Y$$
+
+当 $({X^T}X)^{ - 1}$ 存在时，即得模型参数的最小二乘估计为：
+
+$$\hat \beta  = ({X^T}X)^{ - 1}{X^T}Y$$ {#eq:model11}
+
+依照式 [@eq:model11]求解 $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 的表达式称为模型参数 $\beta_1,
+\beta_2, \beta_{i}, \beta_p$ 的最小二乘估计量。
+
+### 最小二乘估计量的性质
+
+与一元线性回归模型类似，多元线性回归模型中模型参数的最小二乘估计量也是随机变量。数学上可以证明，在基本
+假定条件可以满足时，多元回归模型中模型参数最小二乘估计量的期望值同样等于总体回归系数的真值，即
+
+$$E(\hat \beta) = \beta$$
+
+模型参数最小二乘估计量的方差、协方差矩阵为：
+
+$$D(\hat \beta ) = {\mathop{\rm cov}} (\hat \beta ,\;\hat \beta ) = E(\hat \beta  - \beta )(\hat \beta  - 
+\beta )^T = \sigma ^2({X^T}X)^{ - 1}$$
+
+
+该矩阵主对角元素是各回归系数估计量的方差 ，其他元素是各模型参数估计量之间的协方差
+$E(\hat \beta _i - \beta_i)(\hat \beta _j - \beta _j)\;\;(i \ne j)$ 。在此基础上，还可以进一步证明模型参数的最小二乘估计量是最优线性无偏估计量和一致估计量。
 
 ## 多元线性回归函数的拟合优度
 
+在多元线性回归分析中，总离差平方和的分解公式依然成立。因此，也可以利用上一节所定义的样本决定系数作为评
+价模型拟合优度的一项指标。
+
+样本复决定系数是指在多元回归分析中，回归平方和与总离差平方和之比，记为 $R^2$ 。利用总离差平方和的分解式:
+
+$$\sum\limits_{i = 1}^n {(y_i - \bar y)^2}  = \sum\limits_{i = 1}^n {({\hat y}_i - \bar y)}^2  + 
+\sum\limits_{i = 1}^n {(y_i - {\hat y}_i)}^2 $$ {#eq:model12}
+
+简写为： $ SST = SSR + SSE $ ,可得到样本复决定系数的计算公
+式为：
+
+$$R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST}$$ {#eq:model13}
+
+
+由样本复决定系数的定义可知，$R^2$ 的大小取决于残差平方和SSE在总离差平方和SST中所占的比重。在样本容量一定
+的条件下，总离差平方和与自变量的个数无关，而残差平方和则会随着模型中自变量个数的增加而不断减少，至少不会
+增加。因此， 是自变量个数的非递减函数。在一元线性回归模型中，所有模型包含的变量数目都相同，如果使用的样本
+容量也一样，样本决定系数便可以直接作为评价拟合优度的指标。然而，在多元线性回归模型中，各回归模型所含的变
+量的数目未必相同，以 $R^2$ 的大小作为衡量模型拟合优度的指标就不太合适。因此，在多元回归分析中应该使用自由
+度调整后的决定系数，即利用各自的自由度对总离差平方和与残差平方和进行调整，然后再计算调整后的决定系数 $\bar R^2$ 。
+
+$$\bar R^2 = 1 - \frac{SSE/(n - p - 1)}{SST/(n - 1)} = 1 - \frac{n - 1}{n - p - 1}(1 - R^2)$$ {#eq:model14}
+
+显然有 $\bar R^2 \le R^2$ , $\bar R^2$ 随着自变量的增加并不一定增大。由式 [@eq:model14] 可以看到，尽管 $1-R^2$ 
+随着自变量个数的增加而减少，但由于其前面的系数 $(n-1)/(n-p-1)$ 起加权作用，使 $\bar R^2$ 随着自变量的增加并
+不一定增大。当所增加的自变量对回归的贡献很小时， $\bar R^2$ 反而可能减少。
+
+样本决定系数 $R^2$ 的取值在[0，1]区间内，由式 [@eq:model14] 可知 $\bar R^2$ 小于1，但不一定都大于0，在拟合极差
+的场合， $\bar R^2$ 可能为负值。一般而言， $\bar R^2$ 越接近1，表明拟合效果越好; $\bar R^2$  越接近0或小于0表明
+回归拟合的效果越差。
+
 ## 总体方差的估计
+
+除了回归系数以外，多元线性回归模型中还包含了随机误差项的方差 $\sigma^2$ 这个未知参数。与一元线性回归
+分析相似，多元线性回归模型中的 $\sigma^2$ 也是利用残差平方和除以其自由度来估计的，即有
+
+$${\hat \sigma ^2} = \frac{{SSE}}{{n - p - 1}} = \frac{{\sum\limits_{i = 1}^n {\mathop {(\mathop y\nolimits_i  - \mathop {\hat y}\nolimits_i )}\nolimits^2 } }}{{n - p - 1}}$$ {#eq:model15} 
+
+式中， $n$ 是样本容量, $p$ 是模型中自变量个数， $\hat \sigma^2$ 是随机误差项方差 $\sigma^2$ 的无偏估计量。
 
 # 多元线性回归中的显著性检验和参数区间估计
 
 ## 显著性检验
 
+与一元线性回归分析同理，当求出估计的线性回归方程后，还需对回归系数的显著性进行 $t$ 检验和对回归方程的显著性进行  
+ $F$ 检验。多元线性回归方程的显著性检验，与一元线性回归方程的显著性检验既有相同之处，也有不同之处。在一元线性回
+归中，回归方程的 $F$ 检验与回归系数的 $t$ 检验是等价的。但在多元线性回归分析中，这两种检验是不等价的。多元线性
+回归分析中的 $F$ 检验主要是检验因变量 $y$ 与多个自变量整体线性关系的显著性，在 $p$ 个自变量中，只要有一个自变量
+与 $y$ 线性关系显著， $F$ 检验就能通过，但并不意味着 $p$ 个自变量与 $y$ 的线性关系都显著。其回归系数的 $t$ 检验
+则是对每个自变量与因变量 $y$ 的线性关系分别进行单独检验。
+
 ### 线性关系显著性检验
+
+当多元回归模型估计出来后，还需对整个模型的显著性进行检验。对多元线性回归方程显著性的 $F$ 检验就是要检验自变量
+ $x_1,x_2,\cdots,x_p$ 从整体上对随机变量 $y$ 是否有明显的影响。其检验步骤为：
+
+第一步，提出假设。
+
+$${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0, {H_1}:{\beta _1}{\beta _2} \cdots {\beta _p} 不全为 0 $$
+
+
+第二步，构建检验的 $F$ 统计量，并计算 $F$ 值。
+
+为了建立对 $H_0$ 进行检验的 $F$ 统计量，仍然同一元线性回归分析一样，利用总离差平方和的分解式 [@eq:model12]，构造
+ $F$ 统计量如下：
+ 
+$$F = \frac{SSR/p}{SSE/(n - p - 1)} $$ {#eq:model16} 
+
+
+在正态假设下，当原假设 ${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0$ 成立时， 服从自由度为
+ $(p,n-p-1)$ 的 $F$ 分布。于是，可以利用 $F$ 统计量对回归方程的总体显著性进行检验。对于给定的数据
+ $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表11-8 的方差分析表中，
+再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_\alpha(p,n-p-1) $。
+
+```{r tab-1, eval=T,results='markup', cache=F}
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+
+第三步，作出统计决策。
+
+当 $F>F_\alpha(p,n-p-1)$ 时，拒绝原假设 $H_0$ ,认为在显著性水平 $\alpha$ 下， $x_1,x_2,\cdots,x_p$ 对 $y$ 有显著的线性关系，也即认为回归方程是显著的；反之，当 $F \le F_\alpha(p,n-p-1)$时，则认为回归方程不显著。
+
+与一元线性回归一样，也可以根据 $P$ 值作检验。当 $P$ 值 $\le \alpha$ 时，拒绝原假设 $H_0$ ;当 $P$ 值 $\ge \alpha$ ，不拒绝原假设 $H_0$ 。
 
 ### 回归系数显著性检验
 
+在回归方程通过 $F$ 检验后，还需进行 $t$  检验，其目的是分别检验与回归系数 $\beta_i$  对应的自变量 $x_i$ 对因变量的影响是否显著，以便对自变量的取舍做出正确的判断。
+
+多元线性回归模型中回归系数的 $t$  检验，其原理和基本步骤与一元回归模型中的 $t$ 检验基本相同。其步骤如下：
+
+第一步，提出假设。
+
+$$H_0: \beta_j = 0, j=1,2,\cdots,p\;\;H_1:\beta_j \not= 0,j=1,2,\cdots,p$$
+
+
+第二步，构建检验的 $t$ 统计量，并计算 $t$ 值。
+
+$${t_j} = \frac{{\mathop {\hat \beta }\nolimits_j }}{{Se(\mathop {\hat \beta }\nolimits_j )}} = \frac{{{{\hat \beta }_j}}}{{\sqrt {{c_{jj}}} \hat \sigma }}\~t(n - p - 1)$$ {#eq:model17} 
+
+
+式中，$c_{jj}$ 为矩阵 $(X^T\;X)^{-1}$ 主对角线上第 $j$ 个元素；
+$\hat \sigma = \sqrt{{\frac 1 {n-p-1}}{\sum\limits_{i = 1}^n {(y_i-\hat y_i)^2}}}$ 是回归标准差。
+
+第三步，做出统计决策。
+
+当原假设 $H_0: \beta_j=0$ ，成立时，式 [@eq:model17] 构造的统计量 $t_j$ 服从自由度为 $n-p-1$ 的 $t$ 分布。
+给定显著性水平 $\alpha$  ，查出临界值 $t_{\alpha/2}$ 。当 $|{t_j}| > t_{\alpha/2}$ 时，拒绝原假设
+$H_0: \beta_j=0$ ，认为 $\beta_j$ 显著不为零，自变量 $x_j$ 对因变量y的线性效果显著；
+当 $|{t_j}| \le t_{\alpha/2}$ 时，不拒绝原假设 $H_0: \beta_j=0$ ,认为 $\beta_j$ 为零，自变量 $x_j$ 
+对因变量 $y$ 的线性效果不显著。
+ 
 ## 区间估计
+
+当有了参数向量 $\beta_j$ 的估计量 $\hat \beta_j$ 时， $\hat \beta_j$ 与 $\beta_j$ 的接近程度如何？
+这就需构造 $\beta_j$ 的一个以 $\hat \beta_j$ 为中心的区间，该区间以一定的概率包含 $\beta_j$ 。
+
+由 ${\hat \beta _j}\~N({\beta _j},\;\;{c_{jj}}{\sigma ^2}){\rm{ }}(\;j = 0,\;1,\;2,\; \cdots ,\;p)$ ，
+可知
+
+$${t_j} = \frac{{\hat \beta }_j - \beta }{{\sqrt {c_{jj}}} {\hat \sigma} }\~t(n - p - 1)$$
+
+仿照一元线性回归系数区间估计的推导过程，可得 $\beta_j$ 的置信度为 $1-\alpha$ 的置信区间为：
+
+$$({\hat \beta}_j - {t_{\alpha/2}} {\sqrt {c_{jj}}} {\hat \sigma},\;{\hat \beta}_j + {t_{\alpha/2}} {\sqrt {c_{jj}}} {\hat \sigma})$$
+
+
+使用SPSS软件进行回归分析时，通过选项可以直接得到回归系数的置信区间。
 
 # 多元回归方程的预测
 
