@@ -127,21 +127,21 @@ E(\varepsilon _i) = 0,i = 1,2,\cdots ,n\\
 (3)正态分布的假定条件为：
 
 $$\left\{ \begin{array}{l}
-{\varepsilon _i}\~N(0,\sigma ^2),&i=1,2,\cdots,n\\
+{\varepsilon _i}\sim N(0,\sigma ^2),&i=1,2,\cdots,n\\
 \varepsilon_1,\varepsilon_2,\cdots ,\varepsilon_n &相互独立\\ \end{array} \right.$$
 
 
 由上述假定和多元正态分布的性质可知
 
 $$\begin{array}{l}
-\varepsilon \~ N(0,\sigma^2I_n)\\
+\varepsilon \sim N(0,\sigma^2I_n)\\
 E(Y)=X\;\beta\\
 Var(Y)=\sigma^2I_n
 \end{array}$$
 
 因此有
 
-$$Y\~N(X\;\beta,\sigma^2I_n)$$
+$$Y\sim N(X\;\beta,\sigma^2I_n)$$
 
 
 ## 总体回归方程
@@ -153,7 +153,7 @@ E(y|x_1,x_2,\cdots,x_p)=\beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  +\be
 Var(y)=\sigma^2 \end{array}\right.$$ {#eq:model4}
 
 
-它说明随机变量 $y$ 也服从正态分布，且 $y\~N(\beta _0 + {\beta _1}x_1 + \cdots+ \beta_px_p , \sigma^2)$ 。
+它说明随机变量 $y$ 也服从正态分布，且 $y\sim N(\beta _0 + {\beta _1}x_1 + \cdots+ \beta_px_p , \sigma^2)$ 。
 
 对于给定的 $X$ ，因变量 $Y$ 是随机变量，有多个不同的取值，这些不同的取值服从正态分布。
 而 $Y$ 的条件期望值 $E(Y|X)$ 是 $X$ 的线性函数，以下将条件期望 $E(Y|X)$ 简记为 $E(Y)$ 。即
@@ -329,7 +329,7 @@ $$F = \frac{SSR/p}{SSE/(n - p - 1)} $$ {#eq:model16}
 在正态假设下，当原假设 ${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0$ 成立时， 服从自由度为
  $(p,n-p-1)$ 的 $F$ 分布。于是，可以利用 $F$ 统计量对回归方程的总体显著性进行检验。对于给定的数据
  $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表11-8 的方差分析表中，
-再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_\alpha(p,n-p-1) $。
+再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_\alpha (p,n-p-1) $。
 
 ```{r tab-1, eval=T,results='markup', cache=F}
 tab1 <- read.csv('.\\result\\varience analysis.csv')
@@ -357,7 +357,7 @@ $$H_0: \beta_j = 0, j=1,2,\cdots,p\;\;H_1:\beta_j \not= 0,j=1,2,\cdots,p$$
 
 第二步，构建检验的 $t$ 统计量，并计算 $t$ 值。
 
-$${t_j} = \frac{{\mathop {\hat \beta }\nolimits_j }}{{Se(\mathop {\hat \beta }\nolimits_j )}} = \frac{{{{\hat \beta }_j}}}{{\sqrt {{c_{jj}}} \hat \sigma }}\~t(n - p - 1)$$ {#eq:model17} 
+$${t_j} = \frac{{\mathop {\hat \beta }\nolimits_j }}{{Se(\mathop {\hat \beta }\nolimits_j )}} = \frac{{{{\hat \beta }_j}}}{{\sqrt {{c_{jj}}} \hat \sigma }}\sim t(n - p - 1)$$ {#eq:model17} 
 
 
 式中，$c_{jj}$ 为矩阵 $(X^T\;X)^{-1}$ 主对角线上第 $j$ 个元素；
@@ -376,10 +376,10 @@ $H_0: \beta_j=0$ ，认为 $\beta_j$ 显著不为零，自变量 $x_j$ 对因变
 当有了参数向量 $\beta_j$ 的估计量 $\hat \beta_j$ 时， $\hat \beta_j$ 与 $\beta_j$ 的接近程度如何？
 这就需构造 $\beta_j$ 的一个以 $\hat \beta_j$ 为中心的区间，该区间以一定的概率包含 $\beta_j$ 。
 
-由 ${\hat \beta _j}\~N({\beta _j},\;\;{c_{jj}}{\sigma ^2}){\rm{ }}(\;j = 0,\;1,\;2,\; \cdots ,\;p)$ ，
+由 ${\hat \beta _j}\sim N({\beta _j},\;\;{c_{jj}}{\sigma ^2}){\rm{ }}(\;j = 0,\;1,\;2,\; \cdots ,\;p)$ ，
 可知
 
-$${t_j} = \frac{{\hat \beta }_j - \beta }{{\sqrt {c_{jj}}} {\hat \sigma} }\~t(n - p - 1)$$
+$${t_j} = \frac{{\hat \beta }_j - \beta }{{\sqrt {c_{jj}}} {\hat \sigma} }\sim t(n - p - 1)$$
 
 仿照一元线性回归系数区间估计的推导过程，可得 $\beta_j$ 的置信度为 $1-\alpha$ 的置信区间为：
 
@@ -390,10 +390,78 @@ $$({\hat \beta}_j - {t_{\alpha/2}} {\sqrt {c_{jj}}} {\hat \sigma},\;{\hat \beta}
 
 # 多元回归方程的预测
 
+建立回归模型的目的是为了应用，而预测是回归模型最重要的应用之一。下面主要讨论如何根据自变量的取值来对因
+变量进行预测。
+
 ## 点预测
+
+对于模型
+
+$$\hat Y=X \hat \beta$$
+
+如果给定样本以外的解释变量的观测值 $X_0=(1,x_{01},x_{02},\cdots,x_{0p})$ ,可以得到被解释变量 $Y$ 的预测值
+ ${\hat Y} _0$。
 
 ## 区间预测
 
+严格地说， ${\hat Y} _0$ 只是被解释变量预测值的估计值，而不是预测值。原因在于模型中参数估计量的不确
+定性及随即干扰项的影响两个方面。因此，为了进行科学预测，还需求出预测值的置信区间，包括点预测值 $Y_0$ 
+和均值 $E(Y_0)$ 的置信区间。
 
+### 因变量单个值的区间预测
+
+如果已经知道实际的预测值 $Y_0$ ,那么预测误差为
+
+$$e_0=Y_0-\hat Y_0$$
+
+容易证明，在 $X=X_0$ 的条件下
+
+$$E(e_0)=E(X_0\beta + \varepsilon_0 - X_0 \hat\beta)=E[(\varepsilon_0 - 
+X_0(\hat\beta-\beta)]=E[(\varepsilon_0-X_0({X^T}X)^{-1}X^T\varepsilon]=0$$
+
+$$Var(e_0)=E(e_0^2)=E[(\varepsilon_0-X_0({X^T}X)^{-1}X^T\varepsilon]^2=\sigma^2[1+X_0({X^T}X)^{-1}X_0^T]$$
+ 
+ $e_0$服从正态分布，即
+ 
+$$e_0\sim N(\;0,\sigma^2[1+X_0({X^T}X)^{-1}X_0^T]\;)$$
+
+取随机干扰项的样本估计值 $\hat \sigma^2$ ,可得 $e_0$ 的方差的估计量
+
+$$\hat\sigma_{e_0}^2=\hat\sigma^2[1+X_0({X^T}X)^{-1}X_0^T]$$
+
+构造　$t$　统计量
+
+$$t=\frac{\hat Y_0-Y_0}{\hat\sigma_{e_0}}\sim t(n-k-1)$$
+
+可得给定 $1-\alpha$ 的置信水平下 $Y_0$ 的置信区间：
+
+$$\hat Y_0-t\times \hat \sigma \sqrt{1+X_0(X^TX)^{-1}X_0^T}<Y_0<\hat Y_0+t\times \hat \sigma 
+\sqrt{1+X_0(X^TX)^{-1}X_0^T}$$
+
+
+### 因变量均值的区间预测
+
+从参数估计值性质的讨论中易知，在 $X=X_0$ 的条件下
+
+$$E(\hat Y_0)=E(X_0\hat\beta)=X_0E(\hat \beta)=X_0\beta=E(Y_0)$$
+
+$$Var(\hat Y_0)=E[(X_0\hat\beta-X_0\beta)^2]=E[X_0(\hat\beta_0-\beta_0)X_0(\hat\beta_0-\beta_0)]$$
+
+由于 $X_0(\hat\beta_0-\beta_0)$ 为标量，因此
+
+$$Var(\hat Y_0)=E[X_0(\hat\beta_0-\beta_0)(\hat\beta_0-\beta_0)^T{X_0}^T]=X_0E[(\hat\beta_0-\beta_0)(\hat\beta_0-\beta_0)^T]{X_0}^T=\sigma^2X_0(X^TX)^{-1}{X_0}^T$$
+
+容易证明
+
+$$\hat Y_0\sim N(X_0\beta,\sigma^2X_0({X^T}X)^{-1}{X_0}^T)$$
+
+
+取随机干扰项的样本估计量 $\hat \sigma^2$ ，可构造如下 $t$ 统计量:
+
+$${\frac {\hat Y_0-E(Y_0)} {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}}\sim t(n-p-1)$$
+
+于是，得到 $1-\alpha$ 的置信度下 $E(Y_0)$ 的置信区间：
+
+$$\hat Y_0-t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}<E(Y_0)<\hat Y_0+t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}$$
 # 参考文献
 [//]: # (\bibliography{Bibfile})
