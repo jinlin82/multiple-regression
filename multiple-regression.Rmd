@@ -511,6 +511,7 @@ knitr::kable(tab3, row.names =F, align = "l", caption="影响我国历年GDP的�
       longtable = TRUE, booktabs = TRUE, linesep  = "")
 ```
 
+
 设回归模型为：
 $\mathop y\nolimits_t  = {\beta _0} + {\beta _1}{x_1} + {\beta _2}{x_2} + {\beta _3}{x_3} + \mathop \varepsilon \nolimits_t $ ，根据表 \@ref(tab:tab-3) 中的数据，本例采用SPSS19.0进行数据处理。
 
