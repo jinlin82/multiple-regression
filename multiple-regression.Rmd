@@ -86,7 +86,7 @@ y_n = \beta _0 + \beta _1{x_{n1}} + \beta _2{x_{n2}} +  \cdots \beta _p{x_{np}} 
 
 写成矩阵形式为： 
 
-$$Y=X\beta+\varepsilon$$ {#eq:model3}
+$$Y = X{\bf {\beta}}  + {\bf{\varepsilon}} $$ {#eq:model3}
 
 式中，
 
@@ -98,7 +98,12 @@ X = \left[ \begin{array}{c} 1&x_{11}&x_{12}&\cdots&x_{1p}\\ 1&x_{21}&x_{22}&\cdo
 \end{array} \right]$$ 
 
 
-矩阵 $X$ 是一个 $n \times (p+1)$ 的矩阵，人们常称 $X$ 为回归设计矩阵。
+矩阵 $X$ 是一个 $n \times (p+1)$ 的矩阵，人们常称 $X$ 。公式 [@eq:model1] 中的 
+$\varepsilon$ 是随机误差，与一元线性回归的假定类似，对随机误差项也假定：
+
+$$\left\{ \begin{array}{l} E(\varepsilon ) = 0\\ Var(\varepsilon ) = \sigma ^2 \end{array} 
+\right.$$ {#eq:model4}
+
 
 ## 多元线性回归模型的基本假定
 
@@ -106,13 +111,9 @@ X = \left[ \begin{array}{c} 1&x_{11}&x_{12}&\cdots&x_{1p}\\ 1&x_{21}&x_{22}&\cdo
 
 (1)解释变量 $x_1,x_2,\cdots,x_p$ 是确定性变量，即非随机变量，且要求 $rank(X)=p+1<n$ 。
 这表明设计矩阵 $X$ 中的自变量列之间不相关，且样本容量的个数 $n$ 应大于自变量的个数 $p$ ，
-$X$ 是列满秩矩阵。这个假定同时意味着 $\varepsilon_i$ 和 $x_{i,j},j=1,2,\cdots,p$ 变量之
-间的方差为0，即:
+$X$ 是列满秩矩阵。
 
-$$\mathop{\rm cov} (\varepsilon _i,x _{ij})=0 $$ 
-
-
-(2)随机误差项具有0均值和等方差，即:
+(2)随机误差项具有零均值和等方差，即:
 
 $$\left\{ \begin{array}{l}
 E(\varepsilon _i) = 0,i = 1,2,\cdots ,n\\
@@ -122,7 +123,7 @@ E(\varepsilon _i) = 0,i = 1,2,\cdots ,n\\
 \end{array} \right.$$
 
 
-这个假定常称为高斯－马尔可夫条件。 $E(\varepsilon_i)=0$ ，即假设观测值没有系统误差，随机误差 的平均值为0。 $\mathop{\rm cov} (\varepsilon _i,\varepsilon _j)=0,i \ne j$ ，即随机误差 $\varepsilon _i$ 的协方差为0,表明任意不同的两个样本的随机误差项是不相关的。 $\mathop{\rm cov} (\varepsilon _i,\varepsilon _j)=\sigma ^2,i = j$ 表明各随机误差项的方差相同，即各误差项有相同的精度。
+这个假定常称为高斯－马尔可夫条件。 $E(\varepsilon_i)=0$ ，即假设观测值没有系统误差，随机误差 $\varepsilon_i$  的平均值为零。 $\mathop{\rm cov} (\varepsilon _i,\varepsilon _j)=0,i \ne j$ ，即随机误差 $\varepsilon _i$ 的协方差为0,表明任意不同的两个样本的随机误差项是不相关的。 $\mathop{\rm cov} (\varepsilon _i,\varepsilon _j)=\sigma ^2,i = j$ 表明各随机误差项的方差相同，即各误差项有相同的精度。
 
 (3)正态分布的假定条件为：
 
@@ -131,10 +132,13 @@ $$\left\{ \begin{array}{l}
 \varepsilon_1,\varepsilon_2,\cdots ,\varepsilon_n &相互独立\\ \end{array} \right.$$
 
 
-由上述假定和多元正态分布的性质可知
+对于多元线性回归的矩阵形式 [@eq:model3]，这个条件便可表示为：
+
+$$\varepsilon \sim N(0,\sigma^2I_n)$$
+
+由上述假定和多元正态分布的性质可知，随机向量 $Y$ 服从 $n$ 维正态分布，回归模型式 [@eq:model3] 的期望向量
 
 $$\begin{array}{l}
-\varepsilon \sim N(0,\sigma^2I_n)\\
 E(Y)=X\;\beta\\
 Var(Y)=\sigma^2I_n
 \end{array}$$
@@ -145,15 +149,6 @@ $$Y\sim N(X\;\beta,\sigma^2I_n)$$
 
 
 ## 总体回归方程
-
-在满足上述假定的前提下，可进一步推导出：
-
-$$\left\{ \begin{array}{l}
-E(y|x_1,x_2,\cdots,x_p)=\beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  +\beta _p{x_p}\\
-Var(y)=\sigma^2 \end{array}\right.$$ {#eq:model4}
-
-
-它说明随机变量 $y$ 也服从正态分布，且 $y\sim N(\beta _0 + {\beta _1}x_1 + \cdots+ \beta_px_p , \sigma^2)$ 。
 
 对于给定的 $X$ ，因变量 $Y$ 是随机变量，有多个不同的取值，这些不同的取值服从正态分布。
 而 $Y$ 的条件期望值 $E(Y|X)$ 是 $X$ 的线性函数，以下将条件期望 $E(Y|X)$ 简记为 $E(Y)$ 。即
@@ -174,29 +169,25 @@ $$\frac{\partial E(y)}{\partial x_i} = \beta _i$$
 即 $\beta_i$ 表示在其它自变量保持不变的前提条件下，$x_i$ 每变动一个单位时因变量 $y$ 的平均水平的变动量。
 总体回归方程从平均意义上描述了变量 $y$ 与 $x_i$ 之间的统计规律。
 
-$\varepsilon$ 是随机误差，与一元线性回归的假定类似，对随机误差项也假定：
-
-$$\left\{ \begin{array}{l} E(\varepsilon ) = 0\\ Var(\varepsilon ) = \sigma ^2 \end{array} 
-\right.$$ 
-
+对于回归方程式 [@eq:model6] 的图形，已不像一元线性回归时那样是一条直线，当 $p=2$ 是一个回归平面。当 $p\ge2$ 
+时，无法用几何图形表示。 
 
 # 多元线性回归模型参数的估计
 
 ## 样本多元线性回归函数
 
-多元线性回归方程的参数 $\beta_1, \beta_2, \beta_{i}, \beta_p$ 是未知的，需要利用样本数据去估计它们。当用样
-本统计量 $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 去估计线性回归方程的参数 $\beta_1, \beta_2, 
-\beta_{i}, \beta_p$ 时，得到了估计的多元回归方程,即样本多元线性回归函数。其一般表达形式
+多元线性回归方程的参数 $\beta_0, \beta_1, \cdots, \beta_p$ 是未知的，需要利用样本数据去估计它们。当用样
+本统计量 $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 去估计线性回归方程的参数 
+$\beta_0, \beta_1, \cdots, \beta_p$ 时，得到了估计的多元回归方程,即样本多元线性回归函数。其一般表达形式
 
 $$\hat y = \hat \beta_0 + \hat \beta _1 x_1 + \cdots + \hat \beta _p x_p $$ {#eq:model7}
 
 其随机表达式为
 
-$$y=\hat \beta_0 + \hat \beta _1 x_1 + \cdots + \hat \beta _p x_p + \hat \varepsilon$$ {#eq:model8}
+$$y=\hat \beta_0 + \hat \beta _1 x_1 + \cdots + \hat \beta _p x_p + e$$ {#eq:model8}
 
-式中，$\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 为参数 $\beta_1, \beta_2, \beta_{i}, \beta_p$  的
-估计值； $\hat y$ 为 $E(y)$ 的估计值。 
-
+式中，$\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 为参数 $\beta_0, \beta_1, \cdots, \beta_p$  的
+估计值； $\hat y$ 为 $E(y)$ 的估计值； $e$ 为 $\varepsilon$ 的估计值。 
 
 ## 参数的最小二乘估计及性质
 
@@ -204,7 +195,7 @@ $$y=\hat \beta_0 + \hat \beta _1 x_1 + \cdots + \hat \beta _p x_p + \hat \vareps
 
 多元线性回归方程参数的估计与一元线性回归方程的参数估计原理一样，仍然采用最小二乘估计法。
 
-即寻找参数 $\beta_1, \beta_2, \beta_{i}, \beta_p$ 的估计值 ，使离差平方和
+即寻找参数 $\beta_0, \beta_1, \cdots, \beta_p$ 的估计值 ，使离差平方和
 
 $$ Q = \sum\limits_{i = 1}^n {\mathop {(\mathop y\nolimits_i  - \mathop {\hat y}\nolimits_i )}\nolimits^2 } 
 = \sum\limits_{i = 1}^n {{{({y_i} - {{\hat \beta }_0} - {{\hat \beta }_1}{x_{i1}} - {{\hat \beta }_2}{x_{i2}} 
@@ -236,36 +227,60 @@ $${X^T}X\hat \beta  = {X^T}Y$$
 
 $$\hat \beta  = ({X^T}X)^{ - 1}{X^T}Y$$ {#eq:model11}
 
-依照式 [@eq:model11]求解 $\hat \beta _0, \hat \beta _1, \cdots , \hat \beta _p$ 的表达式称为模型参数 $\beta_1,
-\beta_2, \beta_{i}, \beta_p$ 的最小二乘估计量。
+依照式 [@eq:model11]求解 $\hat \beta _0, \hat \beta _1,\hat \beta _2,\cdots , \hat \beta _p$ 的表达式称为模型参数
+$\beta_0,\beta_1,\beta_2,\cdots, \beta_p$ 的最小二乘估计量。
 
 ### 最小二乘估计量的性质
 
 与一元线性回归模型类似，多元线性回归模型中模型参数的最小二乘估计量也是随机变量。数学上可以证明，在基本
-假定条件可以满足时，多元回归模型中模型参数最小二乘估计量的期望值同样等于总体回归系数的真值，即
+假定条件可以满足时，多元回归模型中模型参数的最小二乘估计量是最优线性无偏估计量。
 
-$$E(\hat \beta) = \beta$$
+(1) 线性性
+
+ $\bf{\beta}$ 是随机向量 $Y$ 的一个线性变换，应用普通最小二乘法估计得到的回归系数向量 $\bf{\beta}$ 的估
+计量为：
+
+$$\hat {\bf{\beta}}  = ({X^T}X)^{ - 1}{X^T}Y$$
+
+根据回归模型假设知，$X$ 是固定的设计矩阵，因此， $\hat {\bf{\beta}}$ 是 $Y$ 的一个线性变换。
+
+(2) $\hat {\bf{\beta}}$ 是 ${\bf{\beta}}$ 的无偏估计。
+
+证明：
+
+$$E(\hat {\bf{\beta}}) = E[({X^T}X)^{ - 1}{X^T}Y]=({X^T}X)^{ - 1}{X^T}E(X{\bf {\beta}}  + {\bf{\varepsilon}})=({X^T}X)^{ - 1}({X^T}X){\bf{\beta}}={\bf{\beta}}$$
+
+
+(3) 有效性
+
+最优一词的含义就是指方差最小。给定一群线性无偏估计量，普通最小二乘估计量的方差最小。
 
 模型参数最小二乘估计量的方差、协方差矩阵为：
 
-$$D(\hat \beta ) = {\mathop{\rm cov}} (\hat \beta ,\;\hat \beta ) = E(\hat \beta  - \beta )(\hat \beta  - 
-\beta )^T = \sigma ^2({X^T}X)^{ - 1}$$
+$$D(\hat {\bf{\beta}} ) = {\mathop{\rm cov}} (\hat {\bf{\beta}} ,\;\hat {\bf{\beta}} ) = E(\hat {\bf{\beta}}  - 
+\hat {\bf{\beta}} )(\hat {\bf{\beta}}  - \hat {\bf{\beta}} )^T = \sigma ^2({X^T}X)^{ - 1}$$
 
 
-该矩阵主对角元素是各回归系数估计量的方差 ，其他元素是各模型参数估计量之间的协方差
-$E(\hat \beta _i - \beta_i)(\hat \beta _j - \beta _j)\;\;(i \ne j)$ 。在此基础上，还可以进一步证明模型参数的最小二乘估计量是最优线性无偏估计量和一致估计量。
+证明：
+
+$$D(\hat {\bf{\beta}} ) = {\mathop{\rm cov}} (\hat {\bf{\beta}},\;\hat {\bf{\beta}} ) = ({X^T}X)^{ - 1}X^T 
+{\mathop{\rm cov}}(Y,Y)(({X^T}X)^{ - 1}X^T)^T=({X^T}X)^{ - 1}X^T \sigma ^2X({X^T}X)^{ - 1}=\sigma ^2({X^T}X)^{- 1}$$
+
+
+该矩阵主对角元素是各回归系数估计量的方差 ，其他元素是各模型参数估计量之间的协方
+差$E(\hat \beta _i - \beta_i)(\hat \beta _j - \beta _j)\;\;(i \ne j)$ 。
 
 ## 多元线性回归函数的拟合优度
 
-在多元线性回归分析中，总离差平方和的分解公式依然成立。因此，也可以利用上一节所定义的样本决定系数作为评
-价模型拟合优度的一项指标。
+样本复决定系数是指在多元回归分析中，回归平方和与总离差平方和之比，记为 $R^2$ 。该统计量可作为评价模
+型拟合优度的一项指标。
 
-样本复决定系数是指在多元回归分析中，回归平方和与总离差平方和之比，记为 $R^2$ 。利用总离差平方和的分解式:
+利用总离差平方和的分解式:
 
 $$\sum\limits_{i = 1}^n {(y_i - \bar y)^2}  = \sum\limits_{i = 1}^n {({\hat y}_i - \bar y)}^2  + 
 \sum\limits_{i = 1}^n {(y_i - {\hat y}_i)}^2 $$ {#eq:model12}
 
-简写为： $ SST = SSR + SSE $ ,可得到样本复决定系数的计算公
+上式可写为： $ 总离差平方和(SST)=回归平方和(SSR)+残差平方和(SSE) $ ,可得到样本复决定系数的计算公
 式为：
 
 $$R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST}$$ {#eq:model13}
@@ -315,7 +330,8 @@ $${\hat \sigma ^2} = \frac{{SSE}}{{n - p - 1}} = \frac{{\sum\limits_{i = 1}^n {\
 
 第一步，提出假设。
 
-$${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0, {H_1}:{\beta _1}{\beta _2} \cdots {\beta _p} 不全为 0 $$
+$${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0, {H_1}:{\beta _1}、{\beta _2}、\cdots、{\beta _p} 
+不全为 0 $$
 
 
 第二步，构建检验的 $F$ 统计量，并计算 $F$ 值。
@@ -328,8 +344,8 @@ $$F = \frac{SSR/p}{SSE/(n - p - 1)} $$ {#eq:model16}
 
 在正态假设下，当原假设 ${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0$ 成立时， 服从自由度为
  $(p,n-p-1)$ 的 $F$ 分布。于是，可以利用 $F$ 统计量对回归方程的总体显著性进行检验。对于给定的数据
- $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表11-8 的方差分析表中，
-再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_\alpha (p,n-p-1) $。
+ $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表 \@ref(tab:tab-1) 的方差分析
+表中，再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_{\alpha} (p,n-p-1) $。
 
 ```{r tab-1, eval=T,results='markup', cache=F}
 tab1 <- read.csv('.\\result\\varience analysis.csv')
@@ -395,73 +411,175 @@ $$({\hat \beta}_j - {t_{\alpha/2}} {\sqrt {c_{jj}}} {\hat \sigma},\;{\hat \beta}
 
 ## 点预测
 
-对于模型
+在通过了各种检验后，多元线性回归模型便可用于预测。多元线性回归预测与一元线性回归预测的原理是一致的，其基
+本方程式为：
+                    
+$${\hat y_i} = {\hat \beta _0} + {\hat \beta _1}{x_{i1}} + {\hat \beta _2}{x_{i2}} +  \cdots  + {\hat \beta _p}{x_{ip}}\;\;\;\;\;\;\;\;\;\;\;\;\;\;i = 1,\;2, \cdots ,n$$
 
-$$\hat Y=X \hat \beta$$
+当给定一组自变量的值 ${x_0} = {({x_{01}},{x_{02}}, \cdots ,{x_{0p}})^T}$ ，要估计所对应的 $y_0$ ，很自然的
+想法就是将 ${x_0} = {({x_{01}},{x_{02}}, \cdots ,{x_{0p}})^T}$ 的值代入到回归方程中去，直接算出 $\hat y_0$ ：
 
-如果给定样本以外的解释变量的观测值 $X_0=(1,x_{01},x_{02},\cdots,x_{0p})$ ,可以得到被解释变量 $Y$ 的预测值
- ${\hat Y} _0$。
-
+$${\hat y_0} = {\hat \beta _0} + {\hat \beta _1}{x_{01}} + {\hat \beta _2}{x_{02}} +  \cdots  + {\hat \beta
+_p}{x_{0p}}\;\;\;\;(\;i = 1,\;2, \cdots ,n)$$
+ 
 ## 区间预测
 
-严格地说， ${\hat Y} _0$ 只是被解释变量预测值的估计值，而不是预测值。原因在于模型中参数估计量的不确
-定性及随即干扰项的影响两个方面。因此，为了进行科学预测，还需求出预测值的置信区间，包括点预测值 $Y_0$ 
-和均值 $E(Y_0)$ 的置信区间。
+严格地说， ${\hat y} _0$ 只是被解释变量预测值的估计值，而不是预测值。原因在于模型中参数估计量的不确
+定性及随即干扰项的影响两个方面。因此，为了进行科学预测，还需求出预测值的置信区间，包括点预测值 $y_0$ 
+和均值 $E(y_0)$ 的置信区间。
 
 ### 因变量单个值的区间预测
 
-如果已经知道实际的预测值 $Y_0$ ,那么预测误差为
+如果已经知道实际的预测值 $y_0$ ,那么预测误差为
 
-$$e_0=Y_0-\hat Y_0$$
+$$e_0=y_0-\hat y_0$$
 
-容易证明，在 $X=X_0$ 的条件下
+容易证明，在 $x=x_0$ 的条件下
 
 $$E(e_0)=E(X_0\beta + \varepsilon_0 - X_0 \hat\beta)=E[(\varepsilon_0 - 
-X_0(\hat\beta-\beta)]=E[(\varepsilon_0-X_0({X^T}X)^{-1}X^T\varepsilon]=0$$
+x_0(\hat\beta-\beta)]=E[(\varepsilon_0-x_0({X^T}X)^{-1}X^T\varepsilon]=0$$
 
-$$Var(e_0)=E(e_0^2)=E[(\varepsilon_0-X_0({X^T}X)^{-1}X^T\varepsilon]^2=\sigma^2[1+X_0({X^T}X)^{-1}X_0^T]$$
+$$Var(e_0)=E(e_0^2)=E[(\varepsilon_0-x_0({X^T}X)^{-1}X^T\varepsilon]^2=\sigma^2[1+x_0({X^T}X)^{-1}x_0^T]$$
  
  $e_0$服从正态分布，即
  
-$$e_0\sim N(\;0,\sigma^2[1+X_0({X^T}X)^{-1}X_0^T]\;)$$
+$$e_0\sim N(\;0,\sigma^2[1+x_0({X^T}X)^{-1}x_0^T]\;)$$
 
 取随机干扰项的样本估计值 $\hat \sigma^2$ ,可得 $e_0$ 的方差的估计量
 
-$$\hat\sigma_{e_0}^2=\hat\sigma^2[1+X_0({X^T}X)^{-1}X_0^T]$$
+$$\hat\sigma_{e_0}^2=\hat\sigma^2[1+x_0({X^T}X)^{-1}x_0^T]$$
 
 构造　$t$　统计量
 
-$$t=\frac{\hat Y_0-Y_0}{\hat\sigma_{e_0}}\sim t(n-k-1)$$
+$$t=\frac{\hat y_0-y_0}{\hat\sigma_{e_0}}\sim t(n-k-1)$$
 
 可得给定 $1-\alpha$ 的置信水平下 $Y_0$ 的置信区间：
 
-$$\hat Y_0-t\times \hat \sigma \sqrt{1+X_0(X^TX)^{-1}X_0^T}<Y_0<\hat Y_0+t\times \hat \sigma 
-\sqrt{1+X_0(X^TX)^{-1}X_0^T}$$
+$$\hat y_0-t\times \hat \sigma \sqrt{1+x_0(X^TX)^{-1}x_0^T}<y_0<\hat y_0+t\times \hat \sigma 
+\sqrt{1+x_0(X^TX)^{-1}x_0^T}$$
 
 
 ### 因变量均值的区间预测
 
 从参数估计值性质的讨论中易知，在 $X=X_0$ 的条件下
 
-$$E(\hat Y_0)=E(X_0\hat\beta)=X_0E(\hat \beta)=X_0\beta=E(Y_0)$$
+$$E(\hat y_0)=E(x_0\hat\beta)=x_0E(\hat \beta)=x_0\beta=E(y_0)$$
 
-$$Var(\hat Y_0)=E[(X_0\hat\beta-X_0\beta)^2]=E[X_0(\hat\beta_0-\beta_0)X_0(\hat\beta_0-\beta_0)]$$
+$$Var(\hat y_0)=E[(x_0\hat\beta-x_0\beta)^2]=E[x_0(\hat\beta_0-\beta_0)x_0(\hat\beta_0-\beta_0)]$$
 
-由于 $X_0(\hat\beta_0-\beta_0)$ 为标量，因此
+由于 $x_0(\hat\beta_0-\beta_0)$ 为标量，因此
 
-$$Var(\hat Y_0)=E[X_0(\hat\beta_0-\beta_0)(\hat\beta_0-\beta_0)^T{X_0}^T]=X_0E[(\hat\beta_0-\beta_0)(\hat\beta_0-\beta_0)^T]{X_0}^T=\sigma^2X_0(X^TX)^{-1}{X_0}^T$$
+$$Var(\hat y_0)=E[x_0(\hat\beta_0-\beta_0)(\hat\beta_0-\beta_0)^T{x_0}^T]=x_0E[(\hat\beta_0-\beta_0)(\hat\beta_0-\beta_0)^T]{x_0}^T=\sigma^2x_0(X^TX)^{-1}{x_0}^T$$
 
 容易证明
 
-$$\hat Y_0\sim N(X_0\beta,\sigma^2X_0({X^T}X)^{-1}{X_0}^T)$$
+$$\hat y_0\sim N(x_0\beta,\sigma^2x_0({X^T}X)^{-1}{x_0}^T)$$
 
 
 取随机干扰项的样本估计量 $\hat \sigma^2$ ，可构造如下 $t$ 统计量:
 
-$${\frac {\hat Y_0-E(Y_0)} {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}}\sim t(n-p-1)$$
+$${\frac {\hat y_0-E(y_0)} {{\hat \sigma}{\sqrt{x_0({X^T}X)^{-1}{x_0}^T}}}}\sim t(n-p-1)$$
 
-于是，得到 $1-\alpha$ 的置信度下 $E(Y_0)$ 的置信区间：
+于是，得到 $1-\alpha$ 的置信度下 $E(y_0)$ 的置信区间：
 
-$$\hat Y_0-t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}<E(Y_0)<\hat Y_0+t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}$$
+$$\hat y_0-t_{\alpha/2} \times {{\hat \sigma}{\sqrt{x_0({X^T}X)^{-1}{x_0}^T}}}<E(y_0)<\hat y_0+t_{\alpha/2} \times {{\hat \sigma}{\sqrt{x_0({X^T}X)^{-1}{x_0}^T}}}$$
+
+# 多元线性回归方程的应用
+
+【例】为研究国内生产总值和固定资产投资、就业人数和社会消费品零售总额的关系，收集了1990-2014年我国的国
+内生产总值、固定资产投资、就业人数以及社会消费品零售总额的数据如表 \@ref(tab:tab-2) 所示：
+
+```{r tab-2, eval=T,results='markup', cache=F}
+tab2 <- read.csv('.\\result\\example data price.csv')
+knitr::kable(tab2, row.names =F, align = "l", caption="影响我国1990-2014年国内生产总值的主要因素",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+
+要求：以国内生产总值为因变量，固定资产投资、就业人数和社会消费品零售总额为自变量，拟合影响国内生产总值
+的多元回归方程，并对回归方程进行检验，并解释模型的经济意义。
+
+解：表 \@ref(tab:tab-2) 中的数据，国内生产总值、固定资产投资、社会消费品零售总额都是按现价核算的，需对数
+据进行处理，因为它们都包含了价格变动因素的影响，因此需剔除价格影响后再建模估计参数。表 \@ref(tab:tab-3) 
+已经对数据进行处理，即先依据《中国统计年鉴2015》中对应的各价格指数计算整理获得GDP价格定基指数（1990年为100）、
+固定资产投资价格定基指数（1990年为100)和社会商品零售价格指数（1990年为100)；然后用现价数据除以相应的定基
+价格指数，得到剔除价格影响之后的数据。
+
+```{r tab-3, eval=T,results='markup', cache=F}
+tab3 <- read.csv('.\\result\\example data.csv')
+knitr::kable(tab3, row.names =F, align = "l", caption="影响我国历年GDP的主要因素",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+设回归模型为：
+$\mathop y\nolimits_t  = {\beta _0} + {\beta _1}{x_1} + {\beta _2}{x_2} + {\beta _3}{x_3} + \mathop \varepsilon \nolimits_t $ ，根据表 \@ref(tab:tab-3) 中的数据，本例采用SPSS19.0进行数据处理。
+
+（1）启动SPSS19.0版本，建立数据文件“1990-2014年影响我国国内生产总值的各因素数据”。
+（2）点击“Analyze”下拉菜单，选中“Regression”中的“Linear”；
+（3）在对话窗口中，根据箭头指示方向将“国内生产总值”作为因变量选入“Dependent”方框，将“固定资产投资”、“就业
+人数”和“社会消费品零售总额”作为自变量选入“Independent”方框；在“Linear Regression”对话窗口中点击“statistics”按钮，
+出现“statistics”对话窗口，选中其中的回归系数区间估计（Confidence Intervals），点击“continue”，返回“Linear 
+Regression”对话窗口；再在“Linear Regression”对话窗口中点击“save”按钮，出现“save”对话窗口，选中其中的均值
+和单个值的区间估计（Prediction Intervals），点击“continue”，返回“Linear Regression”对话窗口。
+（4）点击“OK”按钮，得到下列输出结果：
+
+```{r tab-4, eval=T,results='markup', cache=F}
+tab4 <- read.csv('.\\result\\result A regression method.csv')
+knitr::kable(tab4, row.names =F, align = "l", caption="回归方法表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+
+表 \@ref(tab:tab-4) 为回归方法表。说明进入回归模型或者从回归模型中剔除的变量。本例中进入回归分析的因变量为
+国内生产总值，自变量为固定资产投资、就业人数和社会消费品零售总额；回归分析方法是强制回归法，即选取的自变量
+都进入回归方程，不论其回归系数是否通过显著性检验。
+
+```{r tab-5, eval=T,results='markup', cache=F}
+tab5 <- read.csv('.\\result\\result B model.csv')
+knitr::kable(tab5, row.names =F, align = "l", caption="模型综述表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+表 \@ref(tab:tab-5) 为模型综述表。从上表中可知复相关系数、判决系数以及调整后的判决系数分别为 `r tab5[1,2]`、
+`r tab5[1,3]`、`r tab5[1,4]`，标准误为 `r tab5[1,2]` ，因此可以初步判断模型拟合得较好。
+
+```{r tab-6, eval=T,results='markup', cache=F}
+tab6 <- read.csv('.\\result\\result C ANOVA.csv')
+knitr::kable(tab6, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+表 \@ref(tab:tab-6) 为方差分析表。从该表可知： $F=$ `r tab6[1,4]`，$P$ 值为 `r tab6[1,4]` 。 $F$ 值和 $P$  
+值显示整个回归方程有效，即1990-2014年间我国固定资产投资、就业人数和社会消费品零售总额对国内生产总值线性关
+系显著，进一步肯定了表 \@ref(tab:tab-5) 的结论。
+
+```{r tab-7, eval=T,results='markup', cache=F}
+tab7 <- read.csv('.\\result\\result D coefficient.csv')
+knitr::kable(tab7, row.names =F, align = "l", caption="回归系数表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+表 \@ref(tab:tab-7) 为回归系数表。从该表可知自变量的回归系数的估计值及其标准差、 $t$ 检验值、 $P$ 值以及
+回归系数的95%的置信区间。
+
+利用表 \@ref(tab:tab-3) 的数据，对模型做最小二乘估计，得估计的回归方程如下
+
+$$\mathop {\hat y}\nolimits_i  = {\rm{ - }}100548.3247{\rm{ + }}0.08{x_1}{\rm{ + }}1.8795{x_2} + 0.0557{x_3}$$
+
+ 
+由回归方程可知各因素对因变量的影响程度，其中当就业人数和社会消费品零售总额保持不变，固定资产投资每增加1
+亿元，国内生产总值平均0.08亿元；当固定资产投资和社会消费品零售总额保持不变，就业人数每增加1万人，国内生
+产总值平均1.8795亿元；当固定资产投资和就业人数保持不变，社会消费品零售总额每增加1亿元，国内生产总值平均
+增加约0.0577亿元。
+
+从表 \@ref(tab:tab-7) 我们还可以看到各系数在95%的置信水平下的置信区间：固定资产投资的回归系数95%的置信区
+间为（`r tab7[3,6]` ， `r tab7[3,7]`）；就业人数的回归系数95%的置信区间为（`r tab7[4,6]` ， `r tab7[4,7]`）；
+社会消费品零售总额的回归系数95%的置信区间为（`r tab7[5,6]` , `r tab7[5,7]`）。
+
+需要说明的是：根据经济理论，投资、就业人数、社会消费品零售总额对国内生产总值的影响应该是显著的，但在本例
+估计的结果中，固定资产投资和社会消费品零售总额没有通过显著性检验，这可能是因为模型不满足基本假定，比如因
+为使用的是时序数据可能存在自相关问题，或许还存在异方差、共线性问题。对于这些问题怎样检验以及模型进一步修
+正的方法，请查阅计量经济学中相关内容。
+
 # 参考文献
 [//]: # (\bibliography{Bibfile})
