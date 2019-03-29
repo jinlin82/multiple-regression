@@ -11,7 +11,7 @@ output:
     theme: null
     md_extensions: +east_asian_line_breaks
     keep_md: true
-    toc: false
+    toc: true
     pandoc_args: ["--filter", "pandoc-crossref", "-M", "eqnPrefix="]
   bookdown::word_document2:
     fig_caption: true
@@ -329,7 +329,7 @@ $$F = \frac{SSR/p}{SSE/(n - p - 1)} $$ {#eq:model16}
 在正态假设下，当原假设 ${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0$ 成立时， 服从自由度为
  $(p,n-p-1)$ 的 $F$ 分布。于是，可以利用 $F$ 统计量对回归方程的总体显著性进行检验。对于给定的数据
  $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表11-8 的方差分析表中，
-再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_\alpha (p,n-p-1) $。
+再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_{\alpha} (p,n-p-1)$ 。
 
 ```{r tab-1, eval=T,results='markup', cache=F}
 tab1 <- read.csv('.\\result\\varience analysis.csv')
@@ -463,5 +463,6 @@ $${\frac {\hat Y_0-E(Y_0)} {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}}\sim 
 于是，得到 $1-\alpha$ 的置信度下 $E(Y_0)$ 的置信区间：
 
 $$\hat Y_0-t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}<E(Y_0)<\hat Y_0+t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}$$
+
 # 参考文献
 [//]: # (\bibliography{Bibfile})
