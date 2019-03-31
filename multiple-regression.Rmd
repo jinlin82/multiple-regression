@@ -51,7 +51,7 @@ Sys.setlocale("LC_ALL", "Chinese")
 # 多元线性回归模型及其基本假定
 
 研究一个随机变量与多个自变量之间线性回归问题的统计分析方法称多元线性回归。一元线性回归分析介绍了因变
-量y与一个自变量x有关的线性回归问题，但在实际应用中，因为客观现象非常复杂，现象之间的联系方式和性质各
+量 $y$ 与一个自变量 $x$ 有关的线性回归问题，但在实际应用中，因为客观现象非常复杂，现象之间的联系方式和性质各
 不相同，影响因变量变化的自变量往往是多个而不是一个。如果仅仅进行一元回归分析，是不能得到满意的结果的。
 因此，有必要将一个因变量与多个自变量联系起来进行分析。如影响农作物收获量的因素，除了施肥量外，还有耕
 作深度、降雨量、土质等因素，可以分析各个因素的变化对农作物收获量变化的影响程度。
@@ -69,8 +69,8 @@ Sys.setlocale("LC_ALL", "Chinese")
 
 $$y = \beta _0 + \beta _1{x_1} + \beta _2{x_2} +  \cdots  +\beta _p{x_p}+ \varepsilon$$ {#eq:model1}
 
-式中， $\beta _0,\beta _1,\beta _2,\cdots,\beta_p$ 是 $p+1$ 个未知参数， $\beta_0$ 称为回归截距， 
-$\beta _1,\cdots,\beta_p$称为回归系数。 $y$称为被解释变量（因变量），而 $x_1,x_2,\dots,x_p$
+式中， $\beta_0,\beta_1,\beta_2,\cdots,\beta_p$ 是 $p+1$ 个未知参数， $\beta_0$ 称为回归截距， 
+$\beta_1,\cdots,\beta_p$称为回归系数。 $y$称为被解释变量（因变量），而 $x_1,x_2,\dots,x_p$
 是p个可以精确测量并可控制的自变量，称为解释变量。 $p=1$时，式 [@eq:model1] 即为一元线性回归模型， 
  $p \ge 2$ 时，则称式 [@eq:model1] 为多元线性回归模型。
  
@@ -86,7 +86,7 @@ y_n = \beta _0 + \beta _1{x_{n1}} + \beta _2{x_{n2}} +  \cdots \beta _p{x_{np}} 
 
 写成矩阵形式为： 
 
-$$Y = X{\bf {\beta}}  + {\bf{\varepsilon}} $$ {#eq:model3}
+$$Y = X \boldsymbol \beta  + \varepsilon $$ {#eq:model3}
 
 式中，
 
@@ -139,7 +139,7 @@ $$\varepsilon \sim N(0,\sigma^2I_n)$$
 由上述假定和多元正态分布的性质可知，随机向量 $Y$ 服从 $n$ 维正态分布，回归模型式 [@eq:model3] 的期望向量
 
 $$\begin{array}{l}
-E(Y)=X\;\beta\\
+E(Y)=X\beta\\
 Var(Y)=\sigma^2I_n
 \end{array}$$
 
@@ -344,13 +344,8 @@ $$F = \frac{SSR/p}{SSE/(n - p - 1)} $$ {#eq:model16}
 
 在正态假设下，当原假设 ${H_0}:{\beta _1} = {\beta _2} =  \cdots  = {\beta _p} = 0$ 成立时， 服从自由度为
  $(p,n-p-1)$ 的 $F$ 分布。于是，可以利用 $F$ 统计量对回归方程的总体显著性进行检验。对于给定的数据
-<<<<<<< HEAD
- $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表11-8 的方差分析表中，
-再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_{\alpha} (p,n-p-1)$ 。
-=======
  $i=1,2,\cdots,n$ ，计算出 $SSR$ 和 $SSE$ ，进而得到 $F$  的值，其计算过程列在如表 \@ref(tab:tab-1) 的方差分析
 表中，再由给定的显著性水平 $\alpha$ ,查 $F$ 分布表，得到临界值 $F_{\alpha} (p,n-p-1) $。
->>>>>>> 59f57f384b35ef15f12136c569dfe2cd388070cf
 
 ```{r tab-1, eval=T,results='markup', cache=F}
 tab1 <- read.csv('.\\result\\varience analysis.csv')
@@ -418,7 +413,7 @@ $$({\hat \beta}_j - {t_{\alpha/2}} {\sqrt {c_{jj}}} {\hat \sigma},\;{\hat \beta}
 
 在通过了各种检验后，多元线性回归模型便可用于预测。多元线性回归预测与一元线性回归预测的原理是一致的，其基
 本方程式为：
-                    
+
 $${\hat y_i} = {\hat \beta _0} + {\hat \beta _1}{x_{i1}} + {\hat \beta _2}{x_{i2}} +  \cdots  + {\hat \beta _p}{x_{ip}}\;\;\;\;\;\;\;\;\;\;\;\;\;\;i = 1,\;2, \cdots ,n$$
 
 当给定一组自变量的值 ${x_0} = {({x_{01}},{x_{02}}, \cdots ,{x_{0p}})^T}$ ，要估计所对应的 $y_0$ ，很自然的
@@ -516,17 +511,22 @@ knitr::kable(tab3, row.names =F, align = "l", caption="影响我国历年GDP的�
       longtable = TRUE, booktabs = TRUE, linesep  = "")
 ```
 
-
 设回归模型为：
-$\mathop y\nolimits_t  = {\beta _0} + {\beta _1}{x_1} + {\beta _2}{x_2} + {\beta _3}{x_3} + \mathop \varepsilon \nolimits_t $ ，根据表 \@ref(tab:tab-3) 中的数据，本例采用SPSS19.0进行数据处理。
+
+$$y_t  = \beta _0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \varepsilon_t $$
+
+根据表 \@ref(tab:tab-3) 中的数据，本例采用SPSS19.0进行数据处理。
 
 （1）启动SPSS19.0版本，建立数据文件“1990-2014年影响我国国内生产总值的各因素数据”。
+
 （2）点击“Analyze”下拉菜单，选中“Regression”中的“Linear”；
+
 （3）在对话窗口中，根据箭头指示方向将“国内生产总值”作为因变量选入“Dependent”方框，将“固定资产投资”、“就业
 人数”和“社会消费品零售总额”作为自变量选入“Independent”方框；在“Linear Regression”对话窗口中点击“statistics”按钮，
 出现“statistics”对话窗口，选中其中的回归系数区间估计（Confidence Intervals），点击“continue”，返回“Linear 
 Regression”对话窗口；再在“Linear Regression”对话窗口中点击“save”按钮，出现“save”对话窗口，选中其中的均值
 和单个值的区间估计（Prediction Intervals），点击“continue”，返回“Linear Regression”对话窗口。
+
 （4）点击“OK”按钮，得到下列输出结果：
 
 ```{r tab-4, eval=T,results='markup', cache=F}
@@ -587,10 +587,7 @@ $$\mathop {\hat y}\nolimits_i  = {\rm{ - }}100548.3247{\rm{ + }}0.08{x_1}{\rm{ +
 为使用的是时序数据可能存在自相关问题，或许还存在异方差、共线性问题。对于这些问题怎样检验以及模型进一步修
 正的方法，请查阅计量经济学中相关内容。
 
-<<<<<<< HEAD
 $$\hat Y_0-t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}<E(Y_0)<\hat Y_0+t_{\alpha/2} \times {{\hat \sigma}{\sqrt{X_0({X^T}X)^{-1}{X_0}^T}}}$$
 
-=======
->>>>>>> 59f57f384b35ef15f12136c569dfe2cd388070cf
 # 参考文献
 [//]: # (\bibliography{Bibfile})
