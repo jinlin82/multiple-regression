@@ -1,8 +1,8 @@
 rm=list()
 getwd()
-setwd("E://newfiles")
+setwd("E:/github_repo/multiple-regression/result")
 #一、读取数据
-data=read.csv("E:/newfiles/exampledata.csv")
+data=read.csv("E:/github_repo/multiple-regression/result/exampledata.csv")
 colnames(data)=c("year","gdp","invest","employment","consume","gdpdex","investdex","consumedex")
 #二、数据处理，剔除价格因素影响
 newdata=data.frame(data$year,data$gdp/data$gdpdex*100,data$invest/data$investdex*100,data$employment,data$consume/data$consumedex*100)
