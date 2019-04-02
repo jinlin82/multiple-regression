@@ -661,7 +661,7 @@ fun=function(x0){
 conf=apply(x0,1,fun)
 new=predict[,c(3,4,5)]
 new
-##4.利用predict函数计算置信区间
+##4.利用predict计算置信区间
 predict(fit,new,interval="none")#个值预测
 predict(fit,new,interval="confidence")#均值区间预测
 predict(fit,new,interval="prediction")#个值区间预测，与3通过计算得出的置信区间相同
