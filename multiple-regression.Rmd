@@ -661,17 +661,17 @@ fun=function(x0){
 conf=apply(x0,1,fun)
 
 ```
-2015年GDP个值预测区间:(`r x0[1,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,])) `,`r x0[1,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,]))`);
+2015年GDP个值预测区间: $69390.03 \pm 2.08\times 3703.43$ =(`r x0[1,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,]))`，`r x0[1,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,])) `);
 
-2015年GDP均值预测区间：(`r x0[1,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,])) `,`r x0[1,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,]))`);
+2015年GDP均值预测区间：$69390.03 \pm 2.08\times 2284.14$ =(`r x0[1,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,]))`，`r x0[1,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,])) `);
 
-2016年GDP个值预测区间:(`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `,`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`);
+2016年GDP个值预测区间: $71846.60 \pm 2.08\times 3778.49$ =(`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`，`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `);
 
-2016年GDP均值预测区间:(`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `,`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`);
+2016年GDP均值预测区间: $71846.60 \pm 2.08\times 2403.94$ =(`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`，`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `);
 
-2016年GDP个值预测区间:(`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `,`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`);
+2016年GDP个值预测区间: $72675.07 \pm 2.08\times 7248.97$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `);
 
-2016年GDP均值预测区间:(`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `,`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`).
+2016年GDP均值预测区间: $72675.07 \pm 2.08\times 6676.28$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `).
 
 结果显示，GDP真实值均落在个值预测区间内，但2015年和2016年的均值预测区间未包含真实值，应考虑模型基本假定后重
 新构建模型进行拟合，以得到更好的预测效果。
