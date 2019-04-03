@@ -614,7 +614,7 @@ fit=lm(gdp~invest+employment+consume,newdata)#lm函数需要的是数据框，�
 beta=fit$coefficients
 #六、模型预测
 ##1.点预测
-predict=read.csv("E:/github_repo/multiple-regression/result/predict.csv")
+predict=read.csv("./result/predict.csv")
 x1=as.matrix(predict[,c(3,4,5)])
 x0=cbind(rep(1,3),x1)
 y0=as.matrix(predict[,2])
