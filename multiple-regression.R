@@ -25,7 +25,7 @@ x=cbind(rep(1,length(newdata$year)),x1)
 y=as.matrix(newdata[,2])
 beta=solve(t(x)%*%x)%*%t(x)%*%y
 beta
-
+help("predict.lm")
 
 #四、经济计量检验
 ##1.正态性检验
@@ -102,10 +102,12 @@ predict(fit,interval = "prediction")#相当于个值预测
 confx0=fun(x0)
 confx0
 
-ninvest=c(200000,230000,250000)
-nemployment=c(78000,78800,78800)
-nconsume=c(140000,140000,140000)
-new=data.frame(ninvest,nemployment,nconsume)
-x1=matrix(c(200000,78000,140000,230000,78800,140000,250000,78800,140000),nrow = 3,byrow =T)
-predict(fit,new)
-predict(fit)
+invest=c(206922,224617,224445)
+employment=c(77451,77603,77640)
+consume=c(140268,153827,167708)
+new=data.frame(invest,employment,consume)
+new
+predict(fit,new,interval="none")
+predict(fit,new,interval="confidence")
+predict(fit,new,interval="prediction")
+
