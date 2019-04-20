@@ -1,90 +1,110 @@
-rm=list()
-getwd()
-setwd("E:/github_repo/multiple-regression/result")
+## ----setup, echo=F-------------------------------------------------------
+knitr::opts_knit$set(root.dir = getwd())
+knitr::opts_chunk$set(echo = FALSE, results = 'hide')
+knitr::opts_chunk$set(warning = FALSE, message=FALSE)
+
+## ----prepare-------------------------------------------------------------
+rm(list=ls())
+options(digits=4)
+options(scipen=100)
+graphics.off()
+Sys.setlocale("LC_ALL", "Chinese")
+
+## ----tab-11, eval=T,results='markup', cache=F----------------------------
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-12, eval=T,results='markup', cache=F----------------------------
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-13, eval=T,results='markup', cache=F----------------------------
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-14, eval=T,results='markup', cache=F----------------------------
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-15, eval=T,results='markup', cache=F----------------------------
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-1, eval=T,results='markup', cache=F-----------------------------
+tab1 <- read.csv('.\\result\\varience analysis.csv')
+knitr::kable(tab1, row.names =F, align = "l", caption="多元线性回归方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-2, eval=T,results='markup', cache=F-----------------------------
+tab2 <- read.csv('.\\result\\exampledata.csv')
+knitr::kable(tab2, row.names =F, align = "l", caption="影响我国1990-2014年国内生产总值的主要因素",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-3, eval=T,results='markup', cache=F-----------------------------
+tab3 <- read.csv('.\\result\\example data.csv')
+knitr::kable(tab3, row.names =F, align = "l", caption="影响我国历年GDP的主要因素",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-4, eval=T,results='markup', cache=F-----------------------------
+tab4 <- read.csv('.\\result\\result A regression method.csv')
+knitr::kable(tab4, row.names =F, align = "l", caption="回归方法表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-5, eval=T,results='markup', cache=F-----------------------------
+tab5 <- read.csv('.\\result\\result B model.csv')
+knitr::kable(tab5, row.names =F, align = "l", caption="模型综述表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-6, eval=T,results='markup', cache=F-----------------------------
+tab6 <- read.csv('.\\result\\result C ANOVA.csv')
+knitr::kable(tab6, row.names =F, align = "l", caption="方差分析表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-7, eval=T,results='markup', cache=F-----------------------------
+tab7 <- read.csv('.\\result\\result D coefficient.csv')
+knitr::kable(tab7, row.names =F, align = "l", caption="回归系数表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----include=FALSE-------------------------------------------------------
 #一、读取数据
-data=read.csv("E:/github_repo/multiple-regression/result/exampledata.csv")
+data=tab2
 colnames(data)=c("year","gdp","invest","employment","consume","gdpdex","investdex","consumedex")
 #二、数据处理，剔除价格因素影响
 newdata=data.frame(data$year,data$gdp/data$gdpdex*100,data$invest/data$investdex*100,data$employment,data$consume/data$consumedex*100)
 colnames(newdata)=c("year","gdp","invest","employment","consume")
-
 #三、模型拟合
 fit=lm(gdp~invest+employment+consume,newdata)#lm函数需要的是数据框，若是矩阵需要转换
-summary(fit)
-coefficients(fit)
-confint(fit,level=0.95)#列出参数的置信区间
-help("confint")
-#fitted.values(fit)
-#help("fitted")
-anova(fit)
-#各项系数的符号符合经济意义；固定资产投资和社会商品消费总额的系数不显著，R^2和F检验显示模型效果良好
-
-##利用公式进行回归系数计算
-x1=as.matrix(newdata[,c(3,4,5)])
-x=cbind(rep(1,length(newdata$year)),x1)
-y=as.matrix(newdata[,2])
-beta=solve(t(x)%*%x)%*%t(x)%*%y
-beta
-help("predict.lm")
-
-#四、经济计量检验
-##1.正态性检验
-install.packages("car")
-getwd()
-#library(car)
-help(scatterplotMatrix)
-??scatterplotMatrix
-data()
-#.libPaths()#看R包安装到了地方
-#installed.packages()
-#available.packages()
-library(car)
-#install.packages("car")
-plot(fit)
-#正态性
-#Normal q-q图中所有的点大致落在45度直线上，满足正态分布
-qqPlot(fit,labels=row.names(newdata),id.method='identify',simulate=TRUE,main='Q-Q plot')
-row.names(newdata)
-#所有的点都落在置信区间内，表明正态性假设符合
-
-##2.多重共线性
-cor(newdata[3:5])
-#employment和invest间的相关系数高达0.78，consume与invest0.99;employment与consume0.83，存在严重共线性，导致
-#invest和consume 的系数不显著
-install.packages("car")
-library(car)
-scatterplotMatrix(newdata,spread=FALSE,smoother.args=list(lty=2),main="sactter plot matrix")
-vif(fit)
-#sqrt(vif)>2就表明存在多重共线性
-
-##3.误差序列的序列不相关性
-durbinWatsonTest(fit)
-#表明无序列相关性
-
-##4.异方差检验
-ncvTest(fit)
-#表明同方差
-
-#五、逐步回归
-library(MASS)
-stepAIC(fit,direction='backward')
-#<none>中的AIC表示没有变量被删除时模型的AIC
-help(stepAIC)
-stepAIC(fit,direction='both')#根据AIC选择最优模型
-
+beta=fit$coefficients
 #六、模型预测
 ##1.点预测
-x0=c(1,200000,78000,140000)#默认生成的是列向量
-y0=x0%*%beta
-y0
+predict=read.csv("./result/predict.csv")
+x1=as.matrix(predict[,c(3,4,5)])
+x0=cbind(rep(1,3),x1)
+y0=as.matrix(predict[,2])
+haty0=x0%*%beta
+
 #predict()与fitted.values()在没有新数据时，效果一样，都是输出拟合值
 
+## ----tab-8, eval=T,results='markup', cache=F-----------------------------
+tab8 <- read.csv('.\\result\\predict.csv')
+knitr::kable(tab8, row.names =F, align = "l", caption="预测表",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----include=FALSE-------------------------------------------------------
+#六、模型预测
 ##2.方差估计
 sigma=sqrt(sum((fit$residuals)^2)/21)
-
+sigma
 
 ##3.置信区间估计函数
 ###公式计算
+x2=as.matrix(newdata[,c(3,4,5)])
+x=cbind(rep(1,length(newdata$year)),x2)
 fun=function(x0){
   upper1=x0%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0)%*%solve((t(x)%*%x))%*%x0))#个值预测
   lower1=x0%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0)%*%solve((t(x)%*%x))%*%x0))
@@ -92,22 +112,11 @@ fun=function(x0){
   lower2=x0%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0)%*%solve((t(x)%*%x))%*%x0))
   conf=data.frame(lower1,upper1,lower2,upper2)
 }
-conf=apply(x,1,fun)
-conf
-###函数计算
-predict(fit,interval = "confidence")#相当于均值预测
-predict(fit,interval = "prediction")#相当于个值预测
-
-###计算x0=c(c(1,200000,78000,140000))的置信区间
-confx0=fun(x0)
-confx0
-
-invest=c(206922,224617,224445)
-employment=c(77451,77603,77640)
-consume=c(140268,153827,167708)
-new=data.frame(invest,employment,consume)
+conf=apply(x0,1,fun)
+new=predict[,c(3,4,5)]
 new
-predict(fit,new,interval="none")
-predict(fit,new,interval="confidence")
-predict(fit,new,interval="prediction")
+##4.利用predict计算置信区间
+predict(fit,new,interval="none")#个值预测
+predict(fit,new,interval="confidence")#均值区间预测
+predict(fit,new,interval="prediction")#个值区间预测，与3通过计算得出的置信区间相同
 
