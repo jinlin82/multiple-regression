@@ -790,7 +790,38 @@ predict(fit,new,interval="prediction")#个值区间预测，与3通过计算得�
 
 ## 使用Excel进行多元线性回归
 
-1.表 \@ref(tab:tab-3) 中的数据已剔除价格因素影响，本例也可以运用excel进行数据处理。
+【例】为研究国内生产总值和固定资产投资、就业人数和社会消费品零售总额的关系，收集了1990-2014年我国的国
+内生产总值、固定资产投资、就业人数以及社会消费品零售总额的数据如表 \@ref(tab:tab-2) 所示：
+
+```{r tab-4-1, eval=T,results='markup', cache=F}
+tab2 <- read.csv('.\\result\\exampledata.csv')
+knitr::kable(tab2, row.names =F, align = "l", caption="影响我国1990-2014年国内生产总值的主要因素",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+
+要求：1.以国内生产总值(亿元)(y)为因变量，固定资产投资(亿元)(x1)、就业人数(万人(x2)和社会消费品零售总额(亿元)
+(x3)为自变量，拟合影响国内生产总值的多元回归方程，并对回归方程进行检验，并解释模型的经济意义。2.尝试用所得模
+型对2015-2017年的国内生产总值进行预测。
+
+解：1.表 \@ref(tab:tab-4-1) 中的数据，国内生产总值、固定资产投资、社会消费品零售总额都是按现价核算的，需对数
+据进行处理，因为它们都包含了价格变动因素的影响，因此需剔除价格影响后再建模估计参数。表 \@ref(tab:tab-3) 
+已经对数据进行处理，即先依据《中国统计年鉴2015》中对应的各价格指数计算整理获得GDP价格定基指数（1990年为100）、
+固定资产投资价格定基指数（1990年为100)和社会商品零售价格指数（1990年为100)；然后用现价数据除以相应的定基
+价格指数，得到剔除价格影响之后的数据。
+
+```{r tab-5-1, eval=T,results='markup', cache=F}
+tab3 <- read.csv('.\\result\\example data.csv')
+knitr::kable(tab3, row.names =F, align = "l", caption="1990-2014年影响我国国内生产总值的各因素数据",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+```
+
+设回归模型为：
+
+$$y_t  = \beta _0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \varepsilon_t $$
+
+表 \@ref(tab:tab-5-1) 中的数据已剔除价格因素影响，本例可以使用excel进行数据分析步
+骤如下：
 
 （1）启动excel，建立数据文件“1990-2014年影响我国国内生产总值的各因素数据”。
 
@@ -883,9 +914,7 @@ haty0=x0%*%beta
 ```
 
 $$\mathop {\hat y}\nolimits_{2015}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times206921.9{\rm{ + }}1.8795\times77451 + 0.0557\times140267.8=69387.50$$
-
 $$\mathop {\hat y}\nolimits_{2016}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times224616.9{\rm{ + }}1.8795\times77603 + 0.0557\times153826.8=71844.02$$
-
 $$\mathop {\hat y}\nolimits_{2017}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times224444.7{\rm{ + }}1.8795\times77640 + 0.0557\times167708.4=72672.99$$
 
 ```{r tab-17, eval=T,results='markup', cache=F}

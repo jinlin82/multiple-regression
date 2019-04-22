@@ -120,6 +120,16 @@ predict(fit,new,interval="none")#个值预测
 predict(fit,new,interval="confidence")#均值区间预测
 predict(fit,new,interval="prediction")#个值区间预测，与3通过计算得出的置信区间相同
 
+## ----tab-4-1, eval=T,results='markup', cache=F---------------------------
+tab2 <- read.csv('.\\result\\exampledata.csv')
+knitr::kable(tab2, row.names =F, align = "l", caption="影响我国1990-2014年国内生产总值的主要因素",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
+## ----tab-5-1, eval=T,results='markup', cache=F---------------------------
+tab3 <- read.csv('.\\result\\example data.csv')
+knitr::kable(tab3, row.names =F, align = "l", caption="1990-2014年影响我国国内生产总值的各因素数据",
+      longtable = TRUE, booktabs = TRUE, linesep  = "")
+
 ## ----fig1, echo=FALSE, fig.cap="回归", cache=F, dev="png", results='markup'----
 knitr::include_graphics(".\\result\\regression.png")
 
