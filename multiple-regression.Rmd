@@ -526,8 +526,8 @@ $$({\hat \beta}_j - {t_{\alpha/2}} {\sqrt {c_{jj}}} {\hat \sigma},\;{\hat \beta}
 
 ## 多元回归方程的预测
 
-建立回归模型的目的是为了应用，而预测是回归模型最重要的应用之一。下面主要讨论如何根据自变量的取值来对因
-变量进行预测。
+建立回归模型的目的是为了应用，而预测是回归模型最重要的应用之一。下面讨论在多元回
+归模型中如何根据自变量的取值来对因变量进行预测。
 
 ### 点预测
 
@@ -600,198 +600,10 @@ $${\frac {\hat y_0-E(y_0)} {{\hat \sigma}{\sqrt{x_0({X^T}X)^{-1}{x_0}^T}}}}\sim 
 
 $$\hat y_0-t_{\alpha/2} \times {{\hat \sigma}{\sqrt{x_0({X^T}X)^{-1}{x_0}^T}}}<E(y_0)<\hat y_0+t_{\alpha/2} \times {{\hat \sigma}{\sqrt{x_0({X^T}X)^{-1}{x_0}^T}}}$$ {#eq:model49}
 
-## 多元线性回归方程的应用
-
-【例】为研究国内生产总值和固定资产投资、就业人数和社会消费品零售总额的关系，收集了1990-2014年我国的国
-内生产总值、固定资产投资、就业人数以及社会消费品零售总额的数据如表 \@ref(tab:tab-2) 所示：
-
-```{r tab-2, eval=T,results='markup', cache=F}
-tab2 <- read.csv('.\\result\\exampledata.csv')
-knitr::kable(tab2, row.names =F, align = "l", caption="影响我国1990-2014年国内生产总值的主要因素",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-
-要求：1.以国内生产总值(亿元)(y)为因变量，固定资产投资(亿元)(x1)、就业人数(万人(x2)和社会消费品零售总额(亿元)
-(x3)为自变量，拟合影响国内生产总值的多元回归方程，并对回归方程进行检验，并解释模型的经济意义。2.尝试用所得模
-型对2015-2017年的国内生产总值进行预测。
-
-解：1.表 \@ref(tab:tab-2) 中的数据，国内生产总值、固定资产投资、社会消费品零售总额都是按现价核算的，需对数
-据进行处理，因为它们都包含了价格变动因素的影响，因此需剔除价格影响后再建模估计参数。表 \@ref(tab:tab-3) 
-已经对数据进行处理，即先依据《中国统计年鉴2015》中对应的各价格指数计算整理获得GDP价格定基指数（1990年为100）、
-固定资产投资价格定基指数（1990年为100)和社会商品零售价格指数（1990年为100)；然后用现价数据除以相应的定基
-价格指数，得到剔除价格影响之后的数据。
-
-```{r tab-3, eval=T,results='markup', cache=F}
-tab3 <- read.csv('.\\result\\example data.csv')
-knitr::kable(tab3, row.names =F, align = "l", caption="1990-2014年影响我国国内生产总值的各因素数据",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-设回归模型为：
-
-$$y_t  = \beta _0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \varepsilon_t $$
-
-根据表 \@ref(tab:tab-3) 中的数据，本例采用SPSS19.0进行数据处理。
-
-（1）启动SPSS19.0版本，建立数据文件“1990-2014年影响我国国内生产总值的各因素数据”。
-
-（2）点击“Analyze”下拉菜单，选中“Regression”中的“Linear”；
-
-（3）在对话窗口中，根据箭头指示方向将“国内生产总值”作为因变量选入“Dependent”方框，将“固定资产投资”、“就业
-人数”和“社会消费品零售总额”作为自变量选入“Independent”方框；在“Linear Regression”对话窗口中点击“statistics”按钮，
-出现“statistics”对话窗口，选中其中的回归系数区间估计（Confidence Intervals），点击“continue”，返回“Linear 
-Regression”对话窗口；再在“Linear Regression”对话窗口中点击“save”按钮，出现“save”对话窗口，选中其中的均值
-和单个值的区间估计（Prediction Intervals），点击“continue”，返回“Linear Regression”对话窗口。
-
-（4）点击“OK”按钮，得到下列输出结果：
-
-```{r tab-4, eval=T,results='markup', cache=F}
-tab4 <- read.csv('.\\result\\result A regression method.csv')
-knitr::kable(tab4, row.names =F, align = "l", caption="回归方法表",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-
-表 \@ref(tab:tab-4) 为回归方法表。说明进入回归模型或者从回归模型中剔除的变量。本例中进入回归分析的因变量为
-国内生产总值，自变量为固定资产投资、就业人数和社会消费品零售总额；回归分析方法是强制回归法，即选取的自变量
-都进入回归方程，不论其回归系数是否通过显著性检验。
-
-```{r tab-5, eval=T,results='markup', cache=F}
-tab5 <- read.csv('.\\result\\result B model.csv')
-knitr::kable(tab5, row.names =F, align = "l", caption="模型综述表",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-表 \@ref(tab:tab-5) 为模型综述表。从上表中可知复相关系数、判决系数以及调整后的判决系数分别为 `r tab5[1,2]`、
-`r tab5[1,3]`、`r tab5[1,4]`，标准误为 `r tab5[1,5]` ，因此可以初步判断模型拟合得较好。
-
-```{r tab-6, eval=T,results='markup', cache=F}
-tab6 <- read.csv('.\\result\\result C ANOVA.csv')
-knitr::kable(tab6, row.names =F, align = "l", caption="方差分析表",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-表 \@ref(tab:tab-6) 为方差分析表。从该表可知： $F=$ `r tab6[1,5]`，$P$ 值为 `r tab6[1,6]` 。 $F$ 值和 $P$  
-值显示整个回归方程有效，即1990-2014年间我国固定资产投资、就业人数和社会消费品零售总额对国内生产总值线性关
-系显著，进一步肯定了表 \@ref(tab:tab-5) 的结论。
-
-```{r tab-7, eval=T,results='markup', cache=F}
-tab7 <- read.csv('.\\result\\result D coefficient.csv')
-knitr::kable(tab7, row.names =F, align = "l", caption="回归系数表",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-表 \@ref(tab:tab-7) 为回归系数表。从该表可知自变量的回归系数的估计值及其标准差、 $t$ 检验值、 $P$ 值以及
-回归系数的95%的置信区间。
-
-利用表 \@ref(tab:tab-3) 的数据，对模型做最小二乘估计，得估计的回归方程如下
-
-$$\mathop {\hat y}\nolimits_i  = {\rm{ - }}100548.3247{\rm{ + }}0.08{x_1}{\rm{ + }}1.8795{x_2} + 0.0557{x_3}$$ 
-
- 
-由回归方程可知各因素对因变量的影响程度，其中当就业人数和社会消费品零售总额保持不变，固定资产投资每增加1
-亿元，国内生产总值平均0.08亿元；当固定资产投资和社会消费品零售总额保持不变，就业人数每增加1万人，国内生
-产总值平均1.8795亿元；当固定资产投资和就业人数保持不变，社会消费品零售总额每增加1亿元，国内生产总值平均
-增加约0.0577亿元。
-
-从表 \@ref(tab:tab-7) 我们还可以看到各系数在95%的置信水平下的置信区间：固定资产投资的回归系数95%的置信区
-间为（`r tab7[2,6]` ， `r tab7[2,7]`）；就业人数的回归系数95%的置信区间为（`r tab7[3,6]` ， `r tab7[3,7]`）；
-社会消费品零售总额的回归系数95%的置信区间为（`r tab7[4,6]` , `r tab7[4,7]`）。
-
-需要说明的是：根据经济理论，投资、就业人数、社会消费品零售总额对国内生产总值的影响应该是显著的，但在本例
-估计的结果中，固定资产投资和社会消费品零售总额没有通过显著性检验，这可能是因为模型不满足基本假定，比如因
-为使用的是时序数据可能存在自相关问题，或许还存在异方差、共线性问题。对于这些问题怎样检验以及模型进一步修
-正的方法，请查阅计量经济学中相关内容。
-
-2.利用以上所得模型对2015-2017年的不变价国内生产总值进行预测。
-
-(1)不变价国内生产总值个值预测：
-
-```{r include=FALSE}
-#一、读取数据
-data=tab2
-colnames(data)=c("year","gdp","invest","employment","consume","gdpdex","investdex","consumedex")
-#二、数据处理，剔除价格因素影响
-newdata=data.frame(data$year,data$gdp/data$gdpdex*100,data$invest/data$investdex*100,data$employment,data$consume/data$consumedex*100)
-colnames(newdata)=c("year","gdp","invest","employment","consume")
-#三、模型拟合
-fit=lm(gdp~invest+employment+consume,newdata)#lm函数需要的是数据框，若是矩阵需要转换
-beta=fit$coefficients
-#六、模型预测
-##1.点预测
-predict=read.csv("./result/predict.csv")
-x1=as.matrix(predict[,c(3,4,5)])
-x0=cbind(rep(1,3),x1)
-y0=as.matrix(predict[,2])
-haty0=x0%*%beta
-
-#predict()与fitted.values()在没有新数据时，效果一样，都是输出拟合值
-```
-
-$$\mathop {\hat y}\nolimits_{2015}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times206921.9{\rm{ + }}1.8795\times77451 + 0.0557\times140267.8=69387.50$$
-
-$$\mathop {\hat y}\nolimits_{2016}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times224616.9{\rm{ + }}1.8795\times77603 + 0.0557\times153826.8=71844.02$$
-
-$$\mathop {\hat y}\nolimits_{2017}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times224444.7{\rm{ + }}1.8795\times77640 + 0.0557\times167708.4=72672.99$$
-
-
-表 \@ref(tab:tab-8) 给出了2015-2017年剔除价格因素影响的不变价数据，比较显示真实值与预测值之间存在较大偏差，
-这进一步说明不满足基本假定的模型拟合效果欠佳。
-
-```{r tab-8, eval=T,results='markup', cache=F}
-tab8 <- read.csv('.\\result\\predict.csv')
-knitr::kable(tab8, row.names =F, align = "l", caption="预测表",
-      longtable = TRUE, booktabs = TRUE, linesep  = "")
-```
-
-(2)根据公式 [@eq:model43] 和公式 [@eq:model49] 可分别计算2015年不变价国内生产总值个值和均值的区间预测：
-
-```{r include=FALSE}
-#六、模型预测
-##2.方差估计
-sigma=sqrt(sum((fit$residuals)^2)/21)
-sigma
-
-##3.置信区间估计函数
-###公式计算
-x2=as.matrix(newdata[,c(3,4,5)])
-x=cbind(rep(1,length(newdata$year)),x2)
-fun=function(x0){
-  upper1=x0%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0)%*%solve((t(x)%*%x))%*%x0))#个值预测
-  lower1=x0%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0)%*%solve((t(x)%*%x))%*%x0))
-  upper2=x0%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0)%*%solve((t(x)%*%x))%*%x0))#均值预测
-  lower2=x0%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0)%*%solve((t(x)%*%x))%*%x0))
-  conf=data.frame(lower1,upper1,lower2,upper2)
-}
-conf=apply(x0,1,fun)
-new=predict[,c(3,4,5)]
-new
-##4.利用predict计算置信区间
-predict(fit,new,interval="none")#个值预测
-predict(fit,new,interval="confidence")#均值区间预测
-predict(fit,new,interval="prediction")#个值区间预测，与3通过计算得出的置信区间相同
-```
-
-2015年GDP个值预测区间: $69390.03 \pm 2.08\times 3703.43$ =(`r x0[1,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,]))`，`r x0[1,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,])) `);
-
-2015年GDP均值预测区间：$69390.03 \pm 2.08\times 2284.14$ =(`r x0[1,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,]))`，`r x0[1,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[1,])%*%solve((t(x)%*%x))%*%x0[1,])) `);
-
-2016年GDP个值预测区间: $71846.60 \pm 2.08\times 3778.49$ =(`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`，`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `);
-
-2016年GDP均值预测区间: $71846.60 \pm 2.08\times 2403.94$ =(`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`，`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `);
-
-2016年GDP个值预测区间: $72675.07 \pm 2.08\times 7248.97$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `);
-
-2016年GDP均值预测区间: $72675.07 \pm 2.08\times 6676.28$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `).
-
-结果显示，GDP真实值均落在个值预测区间内，但2015年和2016年的均值预测区间未包含真实值，应考虑模型基本假定后重
-新构建模型进行拟合，以得到更好的预测效果。
-
 ## 使用Excel进行多元线性回归
 
 【例】为研究国内生产总值和固定资产投资、就业人数和社会消费品零售总额的关系，收集了1990-2014年我国的国
-内生产总值、固定资产投资、就业人数以及社会消费品零售总额的数据如表 \@ref(tab:tab-2) 所示：
+内生产总值、固定资产投资、就业人数以及社会消费品零售总额的数据如表 \@ref(tab:tab-4-1) 所示：
 
 ```{r tab-4-1, eval=T,results='markup', cache=F}
 tab2 <- read.csv('.\\result\\exampledata.csv')
@@ -800,12 +612,12 @@ knitr::kable(tab2, row.names =F, align = "l", caption="影响我国1990-2014年�
 ```
 
 
-要求：1.以国内生产总值(亿元)(y)为因变量，固定资产投资(亿元)(x1)、就业人数(万人(x2)和社会消费品零售总额(亿元)
-(x3)为自变量，拟合影响国内生产总值的多元回归方程，并对回归方程进行检验，并解释模型的经济意义。2.尝试用所得模
+要求：1.以国内生产总值(亿元)($y$)为因变量，固定资产投资(亿元)($x1$)、就业人数(万人($x2$)和社会消费品零售总额(亿元)
+($x3$)为自变量，拟合影响国内生产总值的多元回归方程，并对回归方程进行检验，并解释模型的经济意义。2.尝试用所得模
 型对2015-2017年的国内生产总值进行预测。
 
 解：1.表 \@ref(tab:tab-4-1) 中的数据，国内生产总值、固定资产投资、社会消费品零售总额都是按现价核算的，需对数
-据进行处理，因为它们都包含了价格变动因素的影响，因此需剔除价格影响后再建模估计参数。表 \@ref(tab:tab-3) 
+据进行处理，因为它们都包含了价格变动因素的影响，因此需剔除价格影响后再建模估计参数。表 \@ref(tab:tab-5-1) 
 已经对数据进行处理，即先依据《中国统计年鉴2015》中对应的各价格指数计算整理获得GDP价格定基指数（1990年为100）、
 固定资产投资价格定基指数（1990年为100)和社会商品零售价格指数（1990年为100)；然后用现价数据除以相应的定基
 价格指数，得到剔除价格影响之后的数据。
@@ -818,10 +630,9 @@ knitr::kable(tab3, row.names =F, align = "l", caption="1990-2014年影响我国�
 
 设回归模型为：
 
-$$y_t  = \beta _0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_3 + \varepsilon_t $$
+$$y_t  = \beta _0 + \beta_1x_{1t} + \beta_2x_{2t} + \beta_3x_{3t} + \varepsilon_t $$
 
-表 \@ref(tab:tab-5-1) 中的数据已剔除价格因素影响，本例可以使用excel进行数据分析步
-骤如下：
+使用excel进行多元回归分析步骤如下：
 
 （1）启动excel，建立数据文件“1990-2014年影响我国国内生产总值的各因素数据”。
 
@@ -919,14 +730,16 @@ $$\mathop {\hat y}\nolimits_{2017}= {\rm{ - }}100548.3247{\rm{ + }}0.08\times224
 
 ```{r tab-17, eval=T,results='markup', cache=F}
 tab17 <- read.csv('.\\result\\predict.csv')
-knitr::kable(tab17, row.names =F, align = "l", caption="预测表",
+tab171 <- read.csv('.\\result\\predict-res.csv')
+knitr::kable(tab171, row.names =F, align = "l", caption="多元线性回归预测表",
       longtable = TRUE, booktabs = TRUE, linesep  = "")
 ```
 
-表 \@ref(tab:tab-17) 给出了2015-2017年剔除价格因素影响的不变价数据，比较显示真实值与预测值之间存在较大偏差，
-这进一步说明不满足基本假定的模型拟合效果欠佳。
+表 \@ref(tab:tab-17) 给出了2015-2017年三个自变量数据和对应的GDP的预测值。
 
-(2)根据公式 [@eq:model43] 和公式 [@eq:model49] 可分别计算2015年不变价国内生产总值个值和均值的区间预测：
+(2)由于多元回归的区间预测需要矩阵计算，用软件 R 进行矩阵计算更方便。根据公式
+[@eq:model43] 和公式 [@eq:model49] 利用R软件可分别计算2015年不变价国内生产总值个
+值和均值的区间预测为：
 
 ```{r include=FALSE}
 #六、模型预测
@@ -962,12 +775,10 @@ predict(fit,new,interval="prediction")#个值区间预测，与3通过计算得�
 
 2016年GDP均值预测区间: $71846.60 \pm 2.08\times 2403.94$ =(`r x0[2,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,]))`，`r x0[2,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[2,])%*%solve((t(x)%*%x))%*%x0[2,])) `);
 
-2016年GDP个值预测区间: $72675.07 \pm 2.08\times 7248.97$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `);
+2017年GDP个值预测区间: $72675.07 \pm 2.08\times 7248.97$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(1+t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `);
 
-2016年GDP均值预测区间: $72675.07 \pm 2.08\times 6676.28$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `).
+2017年GDP均值预测区间: $72675.07 \pm 2.08\times 6676.28$ =(`r x0[3,]%*%beta-qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,]))`，`r x0[3,]%*%beta+qt(0.975,df=21)*sqrt(sigma^2*(t(x0[3,])%*%solve((t(x)%*%x))%*%x0[3,])) `).
 
-结果显示，GDP真实值均落在个值预测区间内，但2015年和2016年的均值预测区间未包含真实值，应考虑模型基本假定后重
-新构建模型进行拟合，以得到更好的预测效果。
 
 # 参考文献
 [//]: # (\bibliography{Bibfile})
