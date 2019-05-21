@@ -46,6 +46,7 @@ output:
     reference_docx: ./style/word-styles-02.docx
   ioslides_presentation:
     highlight: haddock
+    slide_level: 3
 css: ./style/markdown.css
 csl: ./style/chinese-gb7714-2005-numeric.csl
 bibliography: Bibfile.bib
