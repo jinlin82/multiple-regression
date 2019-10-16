@@ -6,7 +6,9 @@
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
-\usepackage{lmodern}
+\newcommand\hmmax{0} %% 防止Too many math alphabets used in version normal.
+\newcommand\bmmax{0} %% 防止Too many math alphabets used in version normal.
+\usepackage{lmodern,bm}   % 必需出现在amsmath等包前面，否则会出错
 $endif$
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
@@ -40,7 +42,7 @@ $if(mathfont)$
     \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
 $if(CJKmainfont)$
-    \usepackage[BoldFont]{xeCJK}
+    \usepackage{xeCJK}
     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
 $endif$
 \fi
@@ -225,6 +227,9 @@ $endif$
 
 \usepackage[BoldFont,SlantFont]{xeCJK}
 \setCJKmainfont[BoldFont=Microsoft YaHei]{SimSun}
+\setCJKsansfont[BoldFont=Microsoft YaHei Bold]{Microsoft YaHei}
+\setCJKromanfont{SimSun}
+\setCJKmonofont{SimSun}
 
 $for(header-includes)$
 $header-includes$
@@ -276,7 +281,6 @@ $endfor$
 \usepackage{wasysym}
 \usepackage{latexsym}
 \usepackage{amssymb}
-\usepackage{lmodern,bm}
 % Package hyperref omitted
 \usepackage{listings}
 \usepackage{tikz}

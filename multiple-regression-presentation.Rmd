@@ -4,9 +4,7 @@ author: "金林"
 date: "2019-03"
 output:
   beamer_presentation:
-    includes:
-      in_header: header.tex
-    keep_tex: yes
+    keep_tex: true
     latex_engine: xelatex
     pandoc_args:
     - --listing
@@ -15,30 +13,30 @@ output:
     slide_level: 3
     template: ./style/beamer-template.tex
   bookdown::html_document2:
-    fig_caption: yes
+    fig_caption: true
     highlight: haddock
-    keep_md: yes
+    keep_md: true
     md_extensions: +east_asian_line_breaks
-    number_sections: yes
+    number_sections: true
     pandoc_args:
     - --filter
     - pandoc-crossref
     - -M
     - eqnPrefix=
-    seq_numbering: no
-    theme: null
-    toc: yes
+    seq_numbering: false
+    theme: false
+    toc: true
   bookdown::pdf_document2:
-    keep_tex: yes
+    keep_tex: true
     latex_engine: xelatex
     md_extensions: +east_asian_line_breaks
     pandoc_args:
     - --listing
     - --filter
     - pandoc-crossref
-    toc: no
+    toc: false
   bookdown::word_document2:
-    fig_caption: yes
+    fig_caption: true
     md_extensions: +east_asian_line_breaks
     pandoc_args:
     - --filter
@@ -51,12 +49,12 @@ css: ./style/markdown.css
 csl: ./style/chinese-gb7714-2005-numeric.csl
 bibliography: Bibfile.bib
 eqnPrefixTemplate: ($$i$$)
-institute: null
-link-citations: yes
-linkReferences: yes
-chapters: yes
-tableEqns: no
-autoEqnLabels: no
+institute: "中南财经政法大学统计系"
+link-citations: true
+linkReferences: true
+chapters: true
+tableEqns: false
+autoEqnLabels: false
 ---
 
 
