@@ -637,5 +637,3 @@ model.matrix(~relevel(Species,ref = "virginica"), iris)
 # 参考文献
 [//]: # (\bibliography{Bibfile})
 
-
-
