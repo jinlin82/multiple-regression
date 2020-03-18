@@ -1,4 +1,4 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,11pt,xcolor=dvipsnames,aspectratio=1610,hyperref={bookmarksdepth=4}$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,11pt,xcolor=dvipsnames,hyperref={bookmarksdepth=4},$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
@@ -213,11 +213,20 @@ $if(dir)$
 \fi
 $endif$
 
+\usepackage[BoldFont,SlantFont]{xeCJK}
+\setCJKmainfont[BoldFont=Microsoft YaHei]{SimSun}
+\setCJKsansfont[BoldFont=Microsoft YaHei Bold]{Microsoft YaHei}
+\setCJKromanfont{SimSun}
+\setCJKmonofont{SimSun}
+\setCJKfamilyfont{song}{AdobeSongStd-Light}
+\setCJKfamilyfont{hei}{AdobeHeitiStd-Regular}
+\setCJKfamilyfont{kai}{AdobeKaitiStd-Regular}
+
 $if(author)$
-\author{$for(author)$$author$$sep$ \\ $endfor$}
+\author[$for(author)$$author$$sep$ \\ $endfor$]{\CJKfamily{kai}$for(author)$$author$$sep$ \\ $endfor$ \\ jinlin@zuel.edu.cn \\}
 $endif$
 $if(institute)$
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+\institute[$for(institute)$$institute$$sep$ \and $endfor$]{\normalsize\CJKfamily{kai}$for(institute)$$institute$$sep$ \and $endfor$}
 $endif$
 
 \date{\today}
@@ -225,11 +234,8 @@ $if(date)$
 \date{$date$}
 $endif$
 
-\usepackage[BoldFont,SlantFont]{xeCJK}
-\setCJKmainfont[BoldFont=Microsoft YaHei]{SimSun}
-\setCJKsansfont[BoldFont=Microsoft YaHei Bold]{Microsoft YaHei}
-\setCJKromanfont{SimSun}
-\setCJKmonofont{SimSun}
+
+
 
 $for(header-includes)$
 $header-includes$
@@ -283,6 +289,7 @@ $endfor$
 \usepackage{amssymb}
 % Package hyperref omitted
 \usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
 \usepackage{tikz}
 
 						   
@@ -335,6 +342,8 @@ $endfor$
 \usefonttheme[onlylarge]{structuresmallcapsserif}
 \usefonttheme[onlymath]{serif}
 \setbeamertemplate{frametitle}{\bfseries\insertframetitle\par\vskip-6pt}
+\setbeamerfont{block title}{shape=\normalfont, series=\bfseries}
+\setbeamercolor{block title}{fg=violet}
 \AtBeginSection[]
 {
 \setcounter{tocdepth}{2}
@@ -344,7 +353,7 @@ $endfor$
 {
 \begin{frame}<beamer>
 \frametitle{}
-\Large \tableofcontents[currentsubsection,sectionstyle=hide/hide, subsectionstyle=show/shaded/hide]
+\large \tableofcontents[currentsection, sectionstyle=shaded/hide, subsectionstyle=show/shaded/hide]
 \end{frame}
 }
 \setlength{\parskip}{1ex plus 0.5ex minus 0.2ex}

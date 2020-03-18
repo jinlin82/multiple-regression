@@ -24,7 +24,6 @@ output:
     - -M
     - eqnPrefix=
     seq_numbering: false
-    theme: false
     toc: true
   bookdown::pdf_document2:
     keep_tex: true
