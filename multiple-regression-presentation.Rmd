@@ -1,59 +1,18 @@
 ---
 title: "线性模型"
 author: "金林"
-date: "2019-03"
-output:
-  beamer_presentation:
-    keep_tex: true
-    latex_engine: xelatex
-    pandoc_args:
-    - --listing
-    - --filter
-    - pandoc-crossref
-    slide_level: 3
-    template: ./style/beamer-template.tex
-  bookdown::html_document2:
-    fig_caption: true
-    highlight: haddock
-    keep_md: true
-    md_extensions: +east_asian_line_breaks
-    number_sections: true
-    pandoc_args:
-    - --filter
-    - pandoc-crossref
-    - -M
-    - eqnPrefix=
-    seq_numbering: false
-    toc: true
-  bookdown::pdf_document2:
-    keep_tex: true
-    latex_engine: xelatex
-    md_extensions: +east_asian_line_breaks
-    pandoc_args:
-    - --listing
-    - --filter
-    - pandoc-crossref
-    toc: false
-  bookdown::word_document2:
-    fig_caption: true
-    md_extensions: +east_asian_line_breaks
-    pandoc_args:
-    - --filter
-    - pandoc-crossref
-    reference_docx: ./style/word-styles-02.docx
-  ioslides_presentation:
-    highlight: haddock
-    slide_level: 3
-css: ./style/markdown.css
+# date: "2019-03"
+institute: 中南财经政法大学统计与数学学院
 csl: ./style/chinese-gb7714-2005-numeric.csl
-bibliography: Bibfile.bib
+css: ./style/markdown.css
+bibliography: [./Bibfile.bib]
 eqnPrefixTemplate: ($$i$$)
-institute: "中南财经政法大学统计系"
 link-citations: true
 linkReferences: true
 chapters: true
 tableEqns: false
 autoEqnLabels: false
+classoption: "aspectratio=1610"
 ---
 
 
